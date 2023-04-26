@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Speech.Synthesis;
 
 namespace IMAVDTP2
@@ -5,11 +6,12 @@ namespace IMAVDTP2
     public partial class Form1 : Form
     {
         SpeechSynthesizer speechSynthesizerObj;
-        private string culture = "en-US";
+        private string culture;
         private PromptBuilder builder;
 
         public Form1()
         {
+            this.culture = "en-US";
             InitializeComponent();
         }
 
@@ -26,6 +28,7 @@ namespace IMAVDTP2
         {
             //Disposes the SpeechSynthesizer object   
             speechSynthesizerObj.Dispose();
+            builder.ClearContent();
             if (textToSpeechBox.Text != "")
             {
                 speechSynthesizerObj = new SpeechSynthesizer();
@@ -83,12 +86,20 @@ namespace IMAVDTP2
         {
             this.culture = "en-US";
             builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
+            speechSynthesizerObj = new SpeechSynthesizer();
+            speechSynthesizerObj.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult, 0,
+                new System.Globalization.CultureInfo(culture)
+                );
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             this.culture = "pt-BR";
             builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
+            speechSynthesizerObj = new SpeechSynthesizer();
+            speechSynthesizerObj.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult, 0,
+              new System.Globalization.CultureInfo(culture)
+              );
         }
     }
 }
