@@ -5,6 +5,8 @@ namespace IMAVDTP2
     public partial class Form1 : Form
     {
         SpeechSynthesizer speechSynthesizerObj;
+        private string culture = "en-US";
+        private PromptBuilder builder;
 
         public Form1()
         {
@@ -14,6 +16,7 @@ namespace IMAVDTP2
         private void Form1_Load(object sender, EventArgs e)
         {
             speechSynthesizerObj = new SpeechSynthesizer();
+            builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
             resumeBtn.Enabled = false;
             pauseBtn.Enabled = false;
             stopBtn.Enabled = false;
@@ -27,7 +30,8 @@ namespace IMAVDTP2
             {
                 speechSynthesizerObj = new SpeechSynthesizer();
                 //Asynchronously speaks the contents present in RichTextBox1   
-                speechSynthesizerObj.SpeakAsync(textToSpeechBox.Text);
+                builder.AppendText(textToSpeechBox.Text);
+                speechSynthesizerObj.SpeakAsync(builder);
                 pauseBtn.Enabled = true;
                 stopBtn.Enabled = true;
             }
@@ -73,6 +77,18 @@ namespace IMAVDTP2
                     speakBtn.Enabled = true;
                 }
             }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.culture = "en-US";
+            builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.culture = "pt-BR";
+            builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
         }
     }
 }

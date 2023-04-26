@@ -35,6 +35,10 @@
             this.stopBtn = new System.Windows.Forms.Button();
             this.pauseBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.englishOnBtn = new System.Windows.Forms.RadioButton();
+            this.portugueseOnBtn = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textToSpeechBox
@@ -104,11 +108,47 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Text to Speech";
             // 
+            // englishOnBtn
+            // 
+            this.englishOnBtn.AutoSize = true;
+            this.englishOnBtn.Location = new System.Drawing.Point(18, 30);
+            this.englishOnBtn.Name = "englishOnBtn";
+            this.englishOnBtn.Size = new System.Drawing.Size(85, 29);
+            this.englishOnBtn.TabIndex = 7;
+            this.englishOnBtn.TabStop = true;
+            this.englishOnBtn.Text = "en-US";
+            this.englishOnBtn.UseVisualStyleBackColor = true;
+            this.englishOnBtn.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // portugueseOnBtn
+            // 
+            this.portugueseOnBtn.AutoSize = true;
+            this.portugueseOnBtn.Location = new System.Drawing.Point(18, 65);
+            this.portugueseOnBtn.Name = "portugueseOnBtn";
+            this.portugueseOnBtn.Size = new System.Drawing.Size(80, 29);
+            this.portugueseOnBtn.TabIndex = 8;
+            this.portugueseOnBtn.TabStop = true;
+            this.portugueseOnBtn.Text = "pt-PT";
+            this.portugueseOnBtn.UseVisualStyleBackColor = true;
+            this.portugueseOnBtn.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.englishOnBtn);
+            this.groupBox1.Controls.Add(this.portugueseOnBtn);
+            this.groupBox1.Location = new System.Drawing.Point(862, 480);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(177, 113);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Language";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 605);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pauseBtn);
             this.Controls.Add(this.stopBtn);
@@ -119,6 +159,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +175,8 @@
         private Button stopBtn;
         private Button pauseBtn;
         private Label label2;
+        private RadioButton englishOnBtn;
+        private RadioButton portugueseOnBtn;
+        private GroupBox groupBox1;
     }
 }
