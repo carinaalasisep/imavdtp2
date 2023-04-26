@@ -72,6 +72,7 @@
             this.resumeBtn.TabIndex = 3;
             this.resumeBtn.Text = "Resume";
             this.resumeBtn.UseVisualStyleBackColor = true;
+            this.resumeBtn.Click += new System.EventHandler(this.resumeBtn_Click);
             // 
             // stopBtn
             // 
@@ -81,6 +82,7 @@
             this.stopBtn.TabIndex = 4;
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = true;
+            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
             // 
             // pauseBtn
             // 
@@ -90,6 +92,7 @@
             this.pauseBtn.TabIndex = 5;
             this.pauseBtn.Text = "Pause";
             this.pauseBtn.UseVisualStyleBackColor = true;
+            this.pauseBtn.Click += new System.EventHandler(this.pauseBtn_Click);
             // 
             // label2
             // 
@@ -115,6 +118,7 @@
             this.Controls.Add(this.textToSpeechBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
