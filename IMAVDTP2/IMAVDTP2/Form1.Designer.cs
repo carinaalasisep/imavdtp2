@@ -38,6 +38,9 @@
             this.englishOnBtn = new System.Windows.Forms.RadioButton();
             this.portugueseOnBtn = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.speechToTxtBox = new System.Windows.Forms.RichTextBox();
+            this.speechToTxtBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,18 +139,49 @@
             // 
             this.groupBox1.Controls.Add(this.englishOnBtn);
             this.groupBox1.Controls.Add(this.portugueseOnBtn);
-            this.groupBox1.Location = new System.Drawing.Point(862, 480);
+            this.groupBox1.Location = new System.Drawing.Point(926, 555);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(177, 113);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Language";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Black", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(11, 300);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(223, 38);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Speech to Text";
+            // 
+            // speechToTxtBox
+            // 
+            this.speechToTxtBox.Location = new System.Drawing.Point(12, 341);
+            this.speechToTxtBox.Name = "speechToTxtBox";
+            this.speechToTxtBox.Size = new System.Drawing.Size(1009, 168);
+            this.speechToTxtBox.TabIndex = 10;
+            this.speechToTxtBox.Text = "";
+            // 
+            // speechToTxtBtn
+            // 
+            this.speechToTxtBtn.Location = new System.Drawing.Point(12, 515);
+            this.speechToTxtBtn.Name = "speechToTxtBtn";
+            this.speechToTxtBtn.Size = new System.Drawing.Size(112, 34);
+            this.speechToTxtBtn.TabIndex = 13;
+            this.speechToTxtBtn.Text = "Speak";
+            this.speechToTxtBtn.UseVisualStyleBackColor = true;
+            this.speechToTxtBtn.Click += new System.EventHandler(this.speechToTxtBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 605);
+            this.ClientSize = new System.Drawing.Size(1115, 680);
+            this.Controls.Add(this.speechToTxtBtn);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.speechToTxtBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pauseBtn);
@@ -178,5 +212,8 @@
         private RadioButton englishOnBtn;
         private RadioButton portugueseOnBtn;
         private GroupBox groupBox1;
+        private Label label3;
+        private RichTextBox speechToTxtBox;
+        private Button speechToTxtBtn;
     }
 }

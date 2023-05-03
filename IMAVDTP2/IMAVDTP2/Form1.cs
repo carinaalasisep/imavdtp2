@@ -1,12 +1,12 @@
-using System.Globalization;
+using System.Speech.Recognition;
 using System.Speech.Synthesis;
 
 namespace IMAVDTP2
 {
     public partial class Form1 : Form
     {
-        SpeechSynthesizer speechSynthesizerObj;
-        private string culture;
+        private SpeechSynthesizer speechSynthesizerObj;
+        private string culture = "en-US";
         private PromptBuilder builder;
 
         public Form1()
@@ -18,7 +18,7 @@ namespace IMAVDTP2
         private void Form1_Load(object sender, EventArgs e)
         {
             speechSynthesizerObj = new SpeechSynthesizer();
-            builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
+            this.builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
             resumeBtn.Enabled = false;
             pauseBtn.Enabled = false;
             stopBtn.Enabled = false;
@@ -32,7 +32,7 @@ namespace IMAVDTP2
             if (textToSpeechBox.Text != "")
             {
                 speechSynthesizerObj = new SpeechSynthesizer();
-                //Asynchronously speaks the contents present in RichTextBox1   
+                //Asynchronously speaks the contents present in RichTextBox   
                 builder.AppendText(textToSpeechBox.Text);
                 speechSynthesizerObj.SpeakAsync(builder);
                 pauseBtn.Enabled = true;
@@ -100,6 +100,41 @@ namespace IMAVDTP2
             speechSynthesizerObj.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult, 0,
               new System.Globalization.CultureInfo(culture)
               );
+            this.builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
+        }
+
+        private void speechToTxtBtn_Click(object sender, EventArgs e)
+        {
+            // Create an in-process speech recognizer for the en-US locale.
+            var culture = new System.Globalization.CultureInfo("en-US");
+            using (
+            SpeechRecognitionEngine recognizer =
+              new SpeechRecognitionEngine())
+            {
+                // Configure input to the speech recognizer.  
+                recognizer.SetInputToDefaultAudioDevice();
+
+                // Create and load a dictation grammar.  
+                recognizer.LoadGrammar(new DictationGrammar());
+
+                // Start asynchronous, continuous speech recognition.  
+                recognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+                // Add a handler for the speech recognized event.  
+                recognizer.SpeechRecognized +=
+                  new EventHandler<SpeechRecognizedEventArgs>(WriteSpeech);
+
+                // Keep the console window open.  
+                while (true)
+                {
+                    Console.ReadLine();
+                }
+            }
+        }
+
+        private void WriteSpeech(object sender, SpeechRecognizedEventArgs e)
+        {
+            speechToTxtBox.AppendText(e.Result.Text);
         }
     }
 }
