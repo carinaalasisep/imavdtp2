@@ -111,30 +111,26 @@ namespace IMAVDTP2
             SpeechRecognitionEngine recognizer =
               new SpeechRecognitionEngine())
             {
-                // Configure input to the speech recognizer.  
-                recognizer.SetInputToDefaultAudioDevice();
 
                 // Create and load a dictation grammar.  
                 recognizer.LoadGrammar(new DictationGrammar());
-
-                // Start asynchronous, continuous speech recognition.  
-                recognizer.RecognizeAsync(RecognizeMode.Multiple);
 
                 // Add a handler for the speech recognized event.  
                 recognizer.SpeechRecognized +=
                   new EventHandler<SpeechRecognizedEventArgs>(WriteSpeech);
 
-                // Keep the console window open.  
-                while (true)
-                {
-                    Console.ReadLine();
-                }
+                // Configure input to the speech recognizer.  
+                recognizer.SetInputToDefaultAudioDevice();
+                // Start asynchronous, continuous speech recognition.  
+                recognizer.RecognizeAsync(RecognizeMode.Multiple);
+
             }
         }
 
         private void WriteSpeech(object sender, SpeechRecognizedEventArgs e)
         {
-            speechToTxtBox.AppendText(e.Result.Text);
+            e.Result.Text.ToString();
+            speechToTxtBox.AppendText(e.Result.Text.ToString());
         }
     }
 }
