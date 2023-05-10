@@ -1,5 +1,7 @@
-using System.Speech.Recognition;
+using Google.Cloud.Speech.V1;
+using Microsoft.VisualBasic.Devices;
 using System.Speech.Synthesis;
+using VisioForge.Libs.NAudio.Wave;
 
 namespace IMAVDTP2
 {
@@ -8,6 +10,13 @@ namespace IMAVDTP2
         private SpeechSynthesizer speechSynthesizerObj;
         private string culture = "en-US";
         private PromptBuilder builder;
+        private SpeechClient speech;
+        private RecognitionConfig config;
+        private BufferedWaveProvider bwp;
+
+        WaveIn waveIn;
+        WaveFileWriter writer;
+        string output = "audio.raw";
 
         public Form1()
         {
@@ -22,6 +31,25 @@ namespace IMAVDTP2
             resumeBtn.Enabled = false;
             pauseBtn.Enabled = false;
             stopBtn.Enabled = false;
+
+            //var speech = SpeechClient.Create();
+            this.speech = new SpeechClientBuilder
+            {
+                CredentialsPath = "../../../credentials.json"
+            }.Build();
+            this.config = new RecognitionConfig
+            {
+                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
+                SampleRateHertz = 16000,
+                LanguageCode = LanguageCodes.English.UnitedStates
+            };
+            
+
+        }
+
+        private void waveIn_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            bwp.AddSamples(e.Buffer, 0, e.BytesRecorded);
         }
 
         private void speakBtn_Click(object sender, EventArgs e)
@@ -105,32 +133,68 @@ namespace IMAVDTP2
 
         private void speechToTxtBtn_Click(object sender, EventArgs e)
         {
-            // Create an in-process speech recognizer for the en-US locale.
-            var culture = new System.Globalization.CultureInfo("en-US");
-            using (
-            SpeechRecognitionEngine recognizer =
-              new SpeechRecognitionEngine())
+            if (WaveIn.DeviceCount < 1)
             {
-
-                // Create and load a dictation grammar.  
-                recognizer.LoadGrammar(new DictationGrammar());
-
-                // Add a handler for the speech recognized event.  
-                recognizer.SpeechRecognized +=
-                  new EventHandler<SpeechRecognizedEventArgs>(WriteSpeech);
-
-                // Configure input to the speech recognizer.  
-                recognizer.SetInputToDefaultAudioDevice();
-                // Start asynchronous, continuous speech recognition.  
-                recognizer.RecognizeAsync(RecognizeMode.Multiple);
-
+                MessageBox.Show("No microphone!");
+                return;
             }
+            waveIn = new WaveIn();
+            waveIn.DataAvailable += new EventHandler<WaveInEventArgs>(waveIn_DataAvailable);
+            waveIn.WaveFormat = new WaveFormat(16000, 1);
+            bwp = new BufferedWaveProvider(waveIn.WaveFormat);
+            bwp.DiscardOnBufferOverflow = true;
+            waveIn.StartRecording();
+            speechToTxtBox.Text = "Listening...";
+
         }
 
-        private void WriteSpeech(object sender, SpeechRecognizedEventArgs e)
+        private void stopSpeakingBtn_Click(object sender, EventArgs e)
         {
-            e.Result.Text.ToString();
-            speechToTxtBox.AppendText(e.Result.Text.ToString());
+
+            speechToTxtBox.Text = "Compiling...";
+            waveIn.StopRecording();
+            if (File.Exists("audio.raw"))
+                File.Delete("audio.raw");
+            writer = new WaveFileWriter(output, waveIn.WaveFormat);
+
+            byte[] buffer = new byte[bwp.BufferLength];
+            int offset = 0;
+            int count = bwp.BufferLength;
+
+            var read = bwp.Read(buffer, offset, count);
+            if (count > 0)
+            {
+                writer.Write(buffer, offset, read);
+            }
+
+            waveIn.Dispose();
+            waveIn = null;
+            writer.Close();
+            writer = null;
+
+            if (File.Exists("audio.raw"))
+            {
+                var response = this.speech.Recognize(new RecognitionConfig()
+                {
+                    Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
+                    SampleRateHertz = 16000,
+                    LanguageCode = "en",
+                }, RecognitionAudio.FromFile("audio.raw"));
+
+                speechToTxtBox.Text = "";
+
+                foreach (var result in response.Results)
+                {
+                    foreach (var alternative in result.Alternatives)
+                    {
+                        speechToTxtBox.AppendText(alternative.Transcript);
+                    }
+                }
+            }
+            else
+            {
+                speechToTxtBox.Text = "Couldnt fetch any audio! ";
+            }
         }
     }
 }
