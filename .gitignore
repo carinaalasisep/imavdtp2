@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/IMAVDTP2/IMAVDTP2/credentials.json
