@@ -43,7 +43,7 @@ namespace IMAVDTP2
                 SampleRateHertz = 16000,
                 LanguageCode = LanguageCodes.English.UnitedStates
             };
-            
+
 
         }
 
@@ -144,14 +144,14 @@ namespace IMAVDTP2
             bwp = new BufferedWaveProvider(waveIn.WaveFormat);
             bwp.DiscardOnBufferOverflow = true;
             waveIn.StartRecording();
-            speechToTxtBox.Text = "Listening...";
+            speechToTxtBtn.BackColor = System.Drawing.Color.Green;
 
         }
 
         private void stopSpeakingBtn_Click(object sender, EventArgs e)
         {
 
-            speechToTxtBox.Text = "Compiling...";
+            speechToTxtBtn.BackColor = System.Drawing.Color.Transparent;
             waveIn.StopRecording();
             if (File.Exists("audio.raw"))
                 File.Delete("audio.raw");
@@ -194,6 +194,36 @@ namespace IMAVDTP2
             else
             {
                 speechToTxtBox.Text = "Couldnt fetch any audio! ";
+            }
+        }
+
+        private void checkOutput_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(textToSpeechBox.Text) || string.IsNullOrEmpty(speechToTxtBox.Text))
+            {
+                MessageBox.Show("You need to write an input or record your speech!");
+            }
+            else
+            {
+                string[] input = textToSpeechBox.Text.Split(" ");
+                string[] output = speechToTxtBox.Text.Split(" ");
+
+                speechToTxtBox.SelectAll();
+
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if (!input[i].ToLower().Equals(output[i].ToLower()))
+                    {
+                        speechToTxtBox.SelectionColor = Color.Red;
+                        speechToTxtBox.SelectedText = output[i] + " ";
+                    } else
+                    {
+                        speechToTxtBox.SelectionColor = Color.Black;
+                        speechToTxtBox.SelectedText = output[i] + " ";
+                    }
+                }
+
+                speechToTxtBox.Select(0, 0);
             }
         }
     }

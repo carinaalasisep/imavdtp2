@@ -28,104 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             textToSpeechBox = new RichTextBox();
-            label1 = new Label();
             speakBtn = new Button();
             resumeBtn = new Button();
             stopBtn = new Button();
             pauseBtn = new Button();
-            label2 = new Label();
             englishOnBtn = new RadioButton();
             portugueseOnBtn = new RadioButton();
             groupBox1 = new GroupBox();
-            label3 = new Label();
             speechToTxtBox = new RichTextBox();
             speechToTxtBtn = new Button();
             stopSpeakingBtn = new Button();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            groupBox4 = new GroupBox();
+            groupBox5 = new GroupBox();
+            compareIO = new Button();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // textToSpeechBox
             // 
-            textToSpeechBox.Location = new Point(8, 46);
-            textToSpeechBox.Margin = new Padding(2);
+            textToSpeechBox.Location = new Point(7, 25);
+            textToSpeechBox.Margin = new Padding(3, 2, 3, 2);
             textToSpeechBox.Name = "textToSpeechBox";
-            textToSpeechBox.Size = new Size(708, 102);
+            textToSpeechBox.Size = new Size(584, 109);
             textToSpeechBox.TabIndex = 0;
             textToSpeechBox.Text = "";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(8, 29);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Write text";
-            // 
             // speakBtn
             // 
-            speakBtn.Location = new Point(8, 150);
-            speakBtn.Margin = new Padding(2);
+            speakBtn.Image = (Image)resources.GetObject("speakBtn.Image");
+            speakBtn.Location = new Point(6, 26);
+            speakBtn.Margin = new Padding(3, 2, 3, 2);
             speakBtn.Name = "speakBtn";
-            speakBtn.Size = new Size(78, 20);
+            speakBtn.Size = new Size(57, 33);
             speakBtn.TabIndex = 2;
-            speakBtn.Text = "Speak";
             speakBtn.UseVisualStyleBackColor = true;
             speakBtn.Click += speakBtn_Click;
             // 
             // resumeBtn
             // 
-            resumeBtn.Location = new Point(134, 150);
-            resumeBtn.Margin = new Padding(2);
+            resumeBtn.Image = (Image)resources.GetObject("resumeBtn.Image");
+            resumeBtn.Location = new Point(105, 26);
+            resumeBtn.Margin = new Padding(3, 2, 3, 2);
             resumeBtn.Name = "resumeBtn";
-            resumeBtn.Size = new Size(78, 20);
+            resumeBtn.Size = new Size(57, 33);
             resumeBtn.TabIndex = 3;
-            resumeBtn.Text = "Resume";
             resumeBtn.UseVisualStyleBackColor = true;
             resumeBtn.Click += resumeBtn_Click;
             // 
             // stopBtn
             // 
-            stopBtn.Location = new Point(380, 150);
-            stopBtn.Margin = new Padding(2);
+            stopBtn.Image = (Image)resources.GetObject("stopBtn.Image");
+            stopBtn.Location = new Point(261, 26);
+            stopBtn.Margin = new Padding(3, 2, 3, 2);
             stopBtn.Name = "stopBtn";
-            stopBtn.Size = new Size(78, 20);
+            stopBtn.Size = new Size(57, 33);
             stopBtn.TabIndex = 4;
-            stopBtn.Text = "Stop";
             stopBtn.UseVisualStyleBackColor = true;
             stopBtn.Click += stopBtn_Click;
             // 
             // pauseBtn
             // 
-            pauseBtn.Location = new Point(256, 150);
-            pauseBtn.Margin = new Padding(2);
+            pauseBtn.Image = (Image)resources.GetObject("pauseBtn.Image");
+            pauseBtn.Location = new Point(182, 26);
+            pauseBtn.Margin = new Padding(3, 2, 3, 2);
             pauseBtn.Name = "pauseBtn";
-            pauseBtn.Size = new Size(78, 20);
+            pauseBtn.Size = new Size(57, 33);
             pauseBtn.TabIndex = 5;
-            pauseBtn.Text = "Pause";
             pauseBtn.UseVisualStyleBackColor = true;
             pauseBtn.Click += pauseBtn_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(8, 5);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(151, 25);
-            label2.TabIndex = 6;
-            label2.Text = "Text to Speech";
             // 
             // englishOnBtn
             // 
             englishOnBtn.AutoSize = true;
-            englishOnBtn.Location = new Point(13, 18);
-            englishOnBtn.Margin = new Padding(2);
+            englishOnBtn.Location = new Point(17, 19);
+            englishOnBtn.Margin = new Padding(3, 2, 3, 2);
             englishOnBtn.Name = "englishOnBtn";
-            englishOnBtn.Size = new Size(57, 19);
+            englishOnBtn.Size = new Size(66, 20);
             englishOnBtn.TabIndex = 7;
             englishOnBtn.TabStop = true;
             englishOnBtn.Text = "en-US";
@@ -135,10 +121,10 @@
             // portugueseOnBtn
             // 
             portugueseOnBtn.AutoSize = true;
-            portugueseOnBtn.Location = new Point(13, 39);
-            portugueseOnBtn.Margin = new Padding(2);
+            portugueseOnBtn.Location = new Point(17, 42);
+            portugueseOnBtn.Margin = new Padding(3, 2, 3, 2);
             portugueseOnBtn.Name = "portugueseOnBtn";
-            portugueseOnBtn.Size = new Size(54, 19);
+            portugueseOnBtn.Size = new Size(64, 20);
             portugueseOnBtn.TabIndex = 8;
             portugueseOnBtn.TabStop = true;
             portugueseOnBtn.Text = "pt-PT";
@@ -149,99 +135,144 @@
             // 
             groupBox1.Controls.Add(englishOnBtn);
             groupBox1.Controls.Add(portugueseOnBtn);
-            groupBox1.Location = new Point(648, 333);
-            groupBox1.Margin = new Padding(2);
+            groupBox1.Location = new Point(359, 78);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(124, 68);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(89, 73);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Language";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(8, 180);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(151, 25);
-            label3.TabIndex = 12;
-            label3.Text = "Speech to Text";
-            // 
             // speechToTxtBox
             // 
-            speechToTxtBox.Location = new Point(8, 205);
-            speechToTxtBox.Margin = new Padding(2);
+            speechToTxtBox.Location = new Point(6, 29);
+            speechToTxtBox.Margin = new Padding(3, 2, 3, 2);
             speechToTxtBox.Name = "speechToTxtBox";
-            speechToTxtBox.Size = new Size(708, 102);
+            speechToTxtBox.Size = new Size(585, 115);
             speechToTxtBox.TabIndex = 10;
             speechToTxtBox.Text = "";
             // 
             // speechToTxtBtn
             // 
-            speechToTxtBtn.Location = new Point(8, 309);
-            speechToTxtBtn.Margin = new Padding(2);
+            speechToTxtBtn.Image = (Image)resources.GetObject("speechToTxtBtn.Image");
+            speechToTxtBtn.Location = new Point(6, 29);
+            speechToTxtBtn.Margin = new Padding(3, 2, 3, 2);
             speechToTxtBtn.Name = "speechToTxtBtn";
-            speechToTxtBtn.Size = new Size(128, 26);
+            speechToTxtBtn.Size = new Size(57, 33);
             speechToTxtBtn.TabIndex = 13;
-            speechToTxtBtn.Text = "Start Speaking";
             speechToTxtBtn.UseVisualStyleBackColor = true;
             speechToTxtBtn.Click += speechToTxtBtn_Click;
             // 
             // stopSpeakingBtn
             // 
-            stopSpeakingBtn.Location = new Point(140, 309);
-            stopSpeakingBtn.Margin = new Padding(2);
+            stopSpeakingBtn.Image = (Image)resources.GetObject("stopSpeakingBtn.Image");
+            stopSpeakingBtn.Location = new Point(104, 29);
+            stopSpeakingBtn.Margin = new Padding(3, 2, 3, 2);
             stopSpeakingBtn.Name = "stopSpeakingBtn";
-            stopSpeakingBtn.Size = new Size(128, 26);
+            stopSpeakingBtn.Size = new Size(57, 33);
             stopSpeakingBtn.TabIndex = 14;
-            stopSpeakingBtn.Text = "Stop Speaking";
             stopSpeakingBtn.UseVisualStyleBackColor = true;
             stopSpeakingBtn.Click += stopSpeakingBtn_Click;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(textToSpeechBox);
+            groupBox2.Location = new Point(456, 31);
+            groupBox2.Margin = new Padding(4, 3, 4, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(4, 3, 4, 3);
+            groupBox2.Size = new Size(598, 147);
+            groupBox2.TabIndex = 15;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Input";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(speechToTxtBox);
+            groupBox3.Location = new Point(456, 189);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(599, 156);
+            groupBox3.TabIndex = 16;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Ouput";
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(speakBtn);
+            groupBox4.Controls.Add(resumeBtn);
+            groupBox4.Controls.Add(pauseBtn);
+            groupBox4.Controls.Add(stopBtn);
+            groupBox4.Location = new Point(15, 31);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(335, 147);
+            groupBox4.TabIndex = 17;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Text-to-Speech";
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(compareIO);
+            groupBox5.Controls.Add(speechToTxtBtn);
+            groupBox5.Controls.Add(stopSpeakingBtn);
+            groupBox5.Location = new Point(16, 189);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(334, 156);
+            groupBox5.TabIndex = 18;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Speech-to-Text";
+            // 
+            // compareIO
+            // 
+            compareIO.Location = new Point(6, 76);
+            compareIO.Name = "compareIO";
+            compareIO.Size = new Size(155, 44);
+            compareIO.TabIndex = 15;
+            compareIO.Text = "Compare Input/Output";
+            compareIO.UseVisualStyleBackColor = true;
+            compareIO.Click += checkOutput_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(780, 408);
-            Controls.Add(stopSpeakingBtn);
-            Controls.Add(speechToTxtBtn);
-            Controls.Add(label3);
-            Controls.Add(speechToTxtBox);
+            ClientSize = new Size(1063, 357);
+            Controls.Add(groupBox5);
+            Controls.Add(groupBox4);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Controls.Add(label2);
-            Controls.Add(pauseBtn);
-            Controls.Add(stopBtn);
-            Controls.Add(resumeBtn);
-            Controls.Add(speakBtn);
-            Controls.Add(label1);
-            Controls.Add(textToSpeechBox);
-            Margin = new Padding(2);
+            Font = new Font("Montserrat Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private RichTextBox textToSpeechBox;
-        private Label label1;
         private Button speakBtn;
         private Button resumeBtn;
         private Button stopBtn;
         private Button pauseBtn;
-        private Label label2;
         private RadioButton englishOnBtn;
         private RadioButton portugueseOnBtn;
         private GroupBox groupBox1;
-        private Label label3;
         private RichTextBox speechToTxtBox;
         private Button speechToTxtBtn;
         private Button stopSpeakingBtn;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private GroupBox groupBox4;
+        private GroupBox groupBox5;
+        private Button compareIO;
     }
 }
