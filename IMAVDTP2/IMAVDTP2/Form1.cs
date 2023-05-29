@@ -1,4 +1,5 @@
 using Google.Cloud.Speech.V1;
+using IMAVDTP2.DrawerHelper;
 using Microsoft.VisualBasic.Devices;
 using System.Speech.Synthesis;
 using VisioForge.Libs.NAudio.Wave;
@@ -199,7 +200,7 @@ namespace IMAVDTP2
 
         private void checkOutput_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(textToSpeechBox.Text) || string.IsNullOrEmpty(speechToTxtBox.Text))
+            if (string.IsNullOrEmpty(textToSpeechBox.Text) || string.IsNullOrEmpty(speechToTxtBox.Text))
             {
                 MessageBox.Show("You need to write an input or record your speech!");
             }
@@ -216,7 +217,8 @@ namespace IMAVDTP2
                     {
                         speechToTxtBox.SelectionColor = Color.Red;
                         speechToTxtBox.SelectedText = output[i] + " ";
-                    } else
+                    }
+                    else
                     {
                         speechToTxtBox.SelectionColor = Color.Black;
                         speechToTxtBox.SelectedText = output[i] + " ";
@@ -225,6 +227,13 @@ namespace IMAVDTP2
 
                 speechToTxtBox.Select(0, 0);
             }
+        }
+
+        private void testBtn_Click(object sender, EventArgs e)
+        {
+            string shape = "circle";
+            Color color = Color.Blue;
+            Drawer.Draw(this.canvas,shape,color);
         }
     }
 }

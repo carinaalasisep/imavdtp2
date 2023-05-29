@@ -45,6 +45,8 @@
             groupBox4 = new GroupBox();
             groupBox5 = new GroupBox();
             compareIO = new Button();
+            canvas = new Panel();
+            testBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -54,6 +56,7 @@
             // 
             // textToSpeechBox
             // 
+            textToSpeechBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textToSpeechBox.Location = new Point(7, 25);
             textToSpeechBox.Margin = new Padding(3, 2, 3, 2);
             textToSpeechBox.Name = "textToSpeechBox";
@@ -74,6 +77,7 @@
             // 
             // resumeBtn
             // 
+            resumeBtn.Anchor = AnchorStyles.Top;
             resumeBtn.Image = (Image)resources.GetObject("resumeBtn.Image");
             resumeBtn.Location = new Point(105, 26);
             resumeBtn.Margin = new Padding(3, 2, 3, 2);
@@ -85,6 +89,7 @@
             // 
             // stopBtn
             // 
+            stopBtn.Anchor = AnchorStyles.Top;
             stopBtn.Image = (Image)resources.GetObject("stopBtn.Image");
             stopBtn.Location = new Point(261, 26);
             stopBtn.Margin = new Padding(3, 2, 3, 2);
@@ -96,6 +101,7 @@
             // 
             // pauseBtn
             // 
+            pauseBtn.Anchor = AnchorStyles.Top;
             pauseBtn.Image = (Image)resources.GetObject("pauseBtn.Image");
             pauseBtn.Location = new Point(182, 26);
             pauseBtn.Margin = new Padding(3, 2, 3, 2);
@@ -107,11 +113,12 @@
             // 
             // englishOnBtn
             // 
+            englishOnBtn.Anchor = AnchorStyles.Top;
             englishOnBtn.AutoSize = true;
-            englishOnBtn.Location = new Point(17, 19);
+            englishOnBtn.Location = new Point(22, 19);
             englishOnBtn.Margin = new Padding(3, 2, 3, 2);
             englishOnBtn.Name = "englishOnBtn";
-            englishOnBtn.Size = new Size(66, 20);
+            englishOnBtn.Size = new Size(76, 22);
             englishOnBtn.TabIndex = 7;
             englishOnBtn.TabStop = true;
             englishOnBtn.Text = "en-US";
@@ -120,11 +127,12 @@
             // 
             // portugueseOnBtn
             // 
+            portugueseOnBtn.Anchor = AnchorStyles.Top;
             portugueseOnBtn.AutoSize = true;
-            portugueseOnBtn.Location = new Point(17, 42);
+            portugueseOnBtn.Location = new Point(22, 42);
             portugueseOnBtn.Margin = new Padding(3, 2, 3, 2);
             portugueseOnBtn.Name = "portugueseOnBtn";
-            portugueseOnBtn.Size = new Size(64, 20);
+            portugueseOnBtn.Size = new Size(70, 22);
             portugueseOnBtn.TabIndex = 8;
             portugueseOnBtn.TabStop = true;
             portugueseOnBtn.Text = "pt-PT";
@@ -135,17 +143,18 @@
             // 
             groupBox1.Controls.Add(englishOnBtn);
             groupBox1.Controls.Add(portugueseOnBtn);
-            groupBox1.Location = new Point(359, 78);
+            groupBox1.Location = new Point(356, 69);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(89, 73);
+            groupBox1.Size = new Size(98, 73);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Language";
             // 
             // speechToTxtBox
             // 
+            speechToTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             speechToTxtBox.Location = new Point(6, 29);
             speechToTxtBox.Margin = new Padding(3, 2, 3, 2);
             speechToTxtBox.Name = "speechToTxtBox";
@@ -166,6 +175,7 @@
             // 
             // stopSpeakingBtn
             // 
+            stopSpeakingBtn.Anchor = AnchorStyles.Top;
             stopSpeakingBtn.Image = (Image)resources.GetObject("stopSpeakingBtn.Image");
             stopSpeakingBtn.Location = new Point(104, 29);
             stopSpeakingBtn.Margin = new Padding(3, 2, 3, 2);
@@ -224,6 +234,7 @@
             // 
             // compareIO
             // 
+            compareIO.Anchor = AnchorStyles.Top;
             compareIO.Location = new Point(6, 76);
             compareIO.Name = "compareIO";
             compareIO.Size = new Size(155, 44);
@@ -232,17 +243,38 @@
             compareIO.UseVisualStyleBackColor = true;
             compareIO.Click += checkOutput_Click;
             // 
+            // canvas
+            // 
+            canvas.BackColor = Color.White;
+            canvas.ForeColor = Color.Transparent;
+            canvas.Location = new Point(16, 357);
+            canvas.Name = "canvas";
+            canvas.Size = new Size(1039, 265);
+            canvas.TabIndex = 19;
+            // 
+            // testBtn
+            // 
+            testBtn.Location = new Point(371, 262);
+            testBtn.Name = "testBtn";
+            testBtn.Size = new Size(77, 51);
+            testBtn.TabIndex = 20;
+            testBtn.Text = "TEST";
+            testBtn.UseVisualStyleBackColor = true;
+            testBtn.Click += testBtn_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(9F, 16F);
+            AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1063, 357);
+            ClientSize = new Size(1063, 634);
+            Controls.Add(testBtn);
+            Controls.Add(canvas);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Font = new Font("Montserrat Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
+            Font = new Font("Microsoft Sans Serif", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
@@ -274,5 +306,7 @@
         private GroupBox groupBox4;
         private GroupBox groupBox5;
         private Button compareIO;
+        private Panel canvas;
+        private Button testBtn;
     }
 }
