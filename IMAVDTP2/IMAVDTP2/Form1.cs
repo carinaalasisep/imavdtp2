@@ -1,7 +1,10 @@
 using Google.Cloud.Speech.V1;
 using IMAVDTP2.DrawerHelper;
 using Microsoft.VisualBasic.Devices;
+using System.Drawing.Drawing2D;
 using System.Speech.Synthesis;
+using System.Windows.Forms;
+using VisioForge.Libs.MediaFoundation.OPM;
 using VisioForge.Libs.NAudio.Wave;
 
 namespace IMAVDTP2
@@ -14,6 +17,8 @@ namespace IMAVDTP2
         private SpeechClient speech;
         private RecognitionConfig config;
         private BufferedWaveProvider bwp;
+        private Drawer drawer = new Drawer();
+        private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -231,9 +236,56 @@ namespace IMAVDTP2
 
         private void testBtn_Click(object sender, EventArgs e)
         {
-            string shape = "circle";
-            Color color = Color.Blue;
-            Drawer.Draw(this.canvas,shape,color);
+            string shape = "triangle";
+            Color color = Color.Green;
+            float angle = 0f;
+            this.createdPanels.Add(drawer.Draw(this.canvas, shape, color,angle));
         }
+
+        private void growBtn_Click(object sender, EventArgs e)
+        {
+            //TODO: REDRAW OF THE SHAPE
+            int shapeNumber = 1;
+            int growthFactor = 2;
+            if (createdPanels[shapeNumber] != null)
+            {
+                createdPanels[shapeNumber].Width *= growthFactor;
+                createdPanels[shapeNumber].Height *= growthFactor;
+                createdPanels[shapeNumber].Invalidate();
+            }
+        }
+
+        private void shrinkBtn_Click(object sender, EventArgs e)
+        {
+            //TODO: REDRAW OF THE SHAPE
+            int shapeNumber = 1;
+            int shrinkFactor = 2;
+            if (createdPanels[shapeNumber] != null)
+            {
+                createdPanels[shapeNumber].Width /= shrinkFactor;
+                createdPanels[shapeNumber].Height /= shrinkFactor;
+                createdPanels[shapeNumber].Invalidate();
+            }
+        }
+
+        private void rotateBtn_Click(object sender, EventArgs e)
+        {
+            int shapeNumber = 1;
+            float newAngle = 15f;
+
+            createdPanels[shapeNumber].angle = newAngle;
+            createdPanels[shapeNumber].Invalidate();
+        }
+
+        private void divideFour_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void divideTwo_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

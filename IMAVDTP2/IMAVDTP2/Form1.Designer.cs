@@ -45,8 +45,13 @@
             groupBox4 = new GroupBox();
             groupBox5 = new GroupBox();
             compareIO = new Button();
-            canvas = new Panel();
             testBtn = new Button();
+            canvas = new FlowLayoutPanel();
+            growBtn = new Button();
+            shrinkBtn = new Button();
+            divideTwo = new Button();
+            divideFour = new Button();
+            rotateBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -143,7 +148,7 @@
             // 
             groupBox1.Controls.Add(englishOnBtn);
             groupBox1.Controls.Add(portugueseOnBtn);
-            groupBox1.Location = new Point(356, 69);
+            groupBox1.Location = new Point(359, 31);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
@@ -243,32 +248,87 @@
             compareIO.UseVisualStyleBackColor = true;
             compareIO.Click += checkOutput_Click;
             // 
-            // canvas
-            // 
-            canvas.BackColor = Color.White;
-            canvas.ForeColor = Color.Transparent;
-            canvas.Location = new Point(16, 357);
-            canvas.Name = "canvas";
-            canvas.Size = new Size(1039, 265);
-            canvas.TabIndex = 19;
-            // 
             // testBtn
             // 
-            testBtn.Location = new Point(371, 262);
+            testBtn.Location = new Point(356, 311);
             testBtn.Name = "testBtn";
-            testBtn.Size = new Size(77, 51);
+            testBtn.Size = new Size(92, 34);
             testBtn.TabIndex = 20;
             testBtn.Text = "TEST";
             testBtn.UseVisualStyleBackColor = true;
             testBtn.Click += testBtn_Click;
+            // 
+            // canvas
+            // 
+            canvas.BackColor = Color.White;
+            canvas.ForeColor = Color.Transparent;
+            canvas.Location = new Point(15, 351);
+            canvas.Name = "canvas";
+            canvas.Size = new Size(1039, 271);
+            canvas.TabIndex = 21;
+            // 
+            // growBtn
+            // 
+            growBtn.Location = new Point(356, 109);
+            growBtn.Name = "growBtn";
+            growBtn.Size = new Size(92, 34);
+            growBtn.TabIndex = 22;
+            growBtn.Text = "grow";
+            growBtn.UseVisualStyleBackColor = true;
+            growBtn.Click += growBtn_Click;
+            // 
+            // shrinkBtn
+            // 
+            shrinkBtn.Location = new Point(356, 149);
+            shrinkBtn.Name = "shrinkBtn";
+            shrinkBtn.Size = new Size(92, 34);
+            shrinkBtn.TabIndex = 23;
+            shrinkBtn.Text = "shrink";
+            shrinkBtn.UseVisualStyleBackColor = true;
+            shrinkBtn.Click += shrinkBtn_Click;
+            // 
+            // divideTwo
+            // 
+            divideTwo.Location = new Point(356, 271);
+            divideTwo.Name = "divideTwo";
+            divideTwo.Size = new Size(92, 34);
+            divideTwo.TabIndex = 24;
+            divideTwo.Text = "/2";
+            divideTwo.UseVisualStyleBackColor = true;
+            divideTwo.Click += divideTwo_Click;
+            // 
+            // divideFour
+            // 
+            divideFour.Location = new Point(356, 231);
+            divideFour.Name = "divideFour";
+            divideFour.Size = new Size(92, 34);
+            divideFour.TabIndex = 25;
+            divideFour.Text = "/4";
+            divideFour.UseVisualStyleBackColor = true;
+            divideFour.Click += divideFour_Click;
+            // 
+            // rotateBtn
+            // 
+            rotateBtn.Location = new Point(356, 191);
+            rotateBtn.Name = "rotateBtn";
+            rotateBtn.Size = new Size(92, 34);
+            rotateBtn.TabIndex = 26;
+            rotateBtn.Text = "rotate";
+            rotateBtn.UseVisualStyleBackColor = true;
+            rotateBtn.Click += rotateBtn_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 634);
-            Controls.Add(testBtn);
+            Controls.Add(rotateBtn);
+            Controls.Add(divideFour);
+            Controls.Add(divideTwo);
+            Controls.Add(shrinkBtn);
+            Controls.Add(growBtn);
             Controls.Add(canvas);
+            Controls.Add(testBtn);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -306,7 +366,12 @@
         private GroupBox groupBox4;
         private GroupBox groupBox5;
         private Button compareIO;
-        private Panel canvas;
         private Button testBtn;
+        private FlowLayoutPanel canvas;
+        private Button growBtn;
+        private Button shrinkBtn;
+        private Button divideTwo;
+        private Button divideFour;
+        private Button rotateBtn;
     }
 }

@@ -13,11 +13,13 @@ namespace IMAVDTP2.DrawerHelper
     {
         public string shape { get; set; }
         public Color color { get; set; }
+        public float angle { get; set; }
 
-        public CustomizedPanel(string shape,Color color)
+        public CustomizedPanel(string shape,Color color,float angle)
         {
             this.shape = shape;
             this.color = color;
+            this.angle = angle;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -46,6 +48,12 @@ namespace IMAVDTP2.DrawerHelper
         {
             Graphics g = e.Graphics;
 
+            //rotation
+            e.Graphics.TranslateTransform(this.Width / 2, this.Height / 2); 
+            e.Graphics.RotateTransform(angle); 
+            e.Graphics.TranslateTransform(-this.Width / 2, -this.Height / 2);
+            //---//
+
             int sideSize = Math.Min(this.Width, this.Height);
             //lower value to assure a square
             int x = (this.Width - sideSize) / 2;
@@ -61,6 +69,11 @@ namespace IMAVDTP2.DrawerHelper
         private void drawStar(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            //rotation
+            e.Graphics.TranslateTransform(this.Width / 2, this.Height / 2);
+            e.Graphics.RotateTransform(angle);
+            e.Graphics.TranslateTransform(-this.Width / 2, -this.Height / 2);
+            //---//
 
             int sideSize = Math.Min(this.Width, this.Height);
 
@@ -93,6 +106,11 @@ namespace IMAVDTP2.DrawerHelper
         private void drawTriangle(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            //rotation
+            e.Graphics.TranslateTransform(this.Width / 2, this.Height / 2);
+            e.Graphics.RotateTransform(angle);
+            e.Graphics.TranslateTransform(-this.Width / 2, -this.Height / 2);
+            //---//
 
             //secure value for an equilateral triangle
             int sideSize = Math.Min(this.Width, this.Height);
@@ -117,6 +135,11 @@ namespace IMAVDTP2.DrawerHelper
         private void drawCircle(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            //rotation
+            e.Graphics.TranslateTransform(this.Width / 2, this.Height / 2);
+            e.Graphics.RotateTransform(angle);
+            e.Graphics.TranslateTransform(-this.Width / 2, -this.Height / 2);
+            //---//
 
             int diameter = Math.Min(this.Width, this.Height);
 
