@@ -1,10 +1,6 @@
 using Google.Cloud.Speech.V1;
 using IMAVDTP2.DrawerHelper;
-using Microsoft.VisualBasic.Devices;
-using System.Drawing.Drawing2D;
 using System.Speech.Synthesis;
-using System.Windows.Forms;
-using VisioForge.Libs.MediaFoundation.OPM;
 using VisioForge.Libs.NAudio.Wave;
 
 namespace IMAVDTP2
@@ -163,9 +159,9 @@ namespace IMAVDTP2
                 File.Delete("audio.raw");
             writer = new WaveFileWriter(output, waveIn.WaveFormat);
 
-            byte[] buffer = new byte[bwp.BufferLength];
-            int offset = 0;
-            int count = bwp.BufferLength;
+            var buffer = new byte[bwp.BufferLength];
+            var offset = 0;
+            var count = bwp.BufferLength;
 
             var read = bwp.Read(buffer, offset, count);
             if (count > 0)
@@ -211,12 +207,12 @@ namespace IMAVDTP2
             }
             else
             {
-                string[] input = textToSpeechBox.Text.Split(" ");
-                string[] output = speechToTxtBox.Text.Split(" ");
+                var input = textToSpeechBox.Text.Split(" ");
+                var output = speechToTxtBox.Text.Split(" ");
 
                 speechToTxtBox.SelectAll();
 
-                for (int i = 0; i < input.Length; i++)
+                for (var i = 0; i < input.Length; i++)
                 {
                     if (!input[i].ToLower().Equals(output[i].ToLower()))
                     {
@@ -236,45 +232,45 @@ namespace IMAVDTP2
 
         private void testBtn_Click(object sender, EventArgs e)
         {
-            string shape = "triangle";
-            Color color = Color.Green;
-            float angle = 0f;
+            var shape = "triangle";
+            var color = Color.Green;
+            var angle = 0f;
             this.createdPanels.Add(drawer.Draw(this.canvas, shape, color, angle));
         }
 
         private void growBtn_Click(object sender, EventArgs e)
         {
             //TODO: REDRAW OF THE SHAPE
-            int shapeNumber = 1;
-            int growthFactor = 2;
-            if (createdPanels[shapeNumber] != null)
+            var growthFactor = 2;
+
+            foreach (var panel in createdPanels)
             {
-                createdPanels[shapeNumber].Width *= growthFactor;
-                createdPanels[shapeNumber].Height *= growthFactor;
-                createdPanels[shapeNumber].Invalidate();
+                panel.Width *= growthFactor;
+                panel.Height *= growthFactor;
+                panel.Invalidate();
             }
         }
 
         private void shrinkBtn_Click(object sender, EventArgs e)
         {
             //TODO: REDRAW OF THE SHAPE
-            int shapeNumber = 1;
-            int shrinkFactor = 2;
-            if (createdPanels[shapeNumber] != null)
+            var shrinkFactor = 2;
+            foreach (var panel in createdPanels)
             {
-                createdPanels[shapeNumber].Width /= shrinkFactor;
-                createdPanels[shapeNumber].Height /= shrinkFactor;
-                createdPanels[shapeNumber].Invalidate();
+                panel.Width /= shrinkFactor;
+                panel.Height /= shrinkFactor;
+                panel.Invalidate();
             }
         }
 
         private void rotateBtn_Click(object sender, EventArgs e)
         {
-            int shapeNumber = 1;
-            float newAngle = 15f;
-
-            createdPanels[shapeNumber].angle += newAngle;
-            createdPanels[shapeNumber].Invalidate();
+            var newAngle = 15f;
+            foreach (var panel in createdPanels)
+            {
+                panel.angle += newAngle;
+                panel.Invalidate();
+            }
         }
 
         private void divideFour_Click(object sender, EventArgs e)
