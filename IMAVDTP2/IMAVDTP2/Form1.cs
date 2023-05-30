@@ -239,7 +239,7 @@ namespace IMAVDTP2
             string shape = "triangle";
             Color color = Color.Green;
             float angle = 0f;
-            this.createdPanels.Add(drawer.Draw(this.canvas, shape, color,angle));
+            this.createdPanels.Add(drawer.Draw(this.canvas, shape, color, angle));
         }
 
         private void growBtn_Click(object sender, EventArgs e)
@@ -273,13 +273,13 @@ namespace IMAVDTP2
             int shapeNumber = 1;
             float newAngle = 15f;
 
-            createdPanels[shapeNumber].angle = newAngle;
+            createdPanels[shapeNumber].angle += newAngle;
             createdPanels[shapeNumber].Invalidate();
         }
 
         private void divideFour_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void divideTwo_Click(object sender, EventArgs e)
