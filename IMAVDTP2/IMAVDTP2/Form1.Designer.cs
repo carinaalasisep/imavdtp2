@@ -266,7 +266,6 @@
             canvas.Name = "canvas";
             canvas.Size = new Size(1039, 271);
             canvas.TabIndex = 21;
-            canvas.Paint += painelPai_Paint;
             // 
             // growBtn
             // 
