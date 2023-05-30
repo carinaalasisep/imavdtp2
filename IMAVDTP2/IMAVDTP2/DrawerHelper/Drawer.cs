@@ -10,7 +10,7 @@ namespace IMAVDTP2.DrawerHelper
         public CustomizedPanel Draw(Panel canvas, string shape, Color color,float angle)
         {
             //the shape is passed to be drawn 
-            CustomizedPanel panel = new CustomizedPanel(shape,color,angle);
+            var panel = new CustomizedPanel(shape,color,angle);
 
             //panel size
             panel.Width = 50;

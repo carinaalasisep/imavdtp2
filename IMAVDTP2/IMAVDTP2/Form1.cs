@@ -45,8 +45,6 @@ namespace IMAVDTP2
                 SampleRateHertz = 16000,
                 LanguageCode = LanguageCodes.English.UnitedStates
             };
-
-
         }
 
         private void waveIn_DataAvailable(object sender, WaveInEventArgs e)
@@ -152,7 +150,6 @@ namespace IMAVDTP2
 
         private void stopSpeakingBtn_Click(object sender, EventArgs e)
         {
-
             speechToTxtBtn.BackColor = System.Drawing.Color.Transparent;
             waveIn.StopRecording();
             if (File.Exists("audio.raw"))
@@ -278,10 +275,24 @@ namespace IMAVDTP2
 
         }
 
-        private void divideTwo_Click(object sender, EventArgs e)
+        private void duplicate_Click(object sender, EventArgs e)
         {
+            var newPanels = new List<CustomizedPanel>();
+            newPanels.AddRange(createdPanels);
 
+            foreach (var panel in createdPanels)
+            {
+                var newPanel = drawer.Draw(this.canvas, panel.shape, panel.color, panel.angle);
+                newPanels.Add(newPanel);
+                panel.Invalidate();
+            }
+
+            createdPanels = newPanels;
+
+            foreach (var panel in newPanels)
+            {
+                this.canvas.Controls.Add(panel);
+            }
         }
-
     }
 }

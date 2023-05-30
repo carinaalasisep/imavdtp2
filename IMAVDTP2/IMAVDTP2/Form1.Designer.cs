@@ -29,323 +29,308 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            textToSpeechBox = new RichTextBox();
-            speakBtn = new Button();
-            resumeBtn = new Button();
-            stopBtn = new Button();
-            pauseBtn = new Button();
-            englishOnBtn = new RadioButton();
-            portugueseOnBtn = new RadioButton();
-            groupBox1 = new GroupBox();
-            speechToTxtBox = new RichTextBox();
-            speechToTxtBtn = new Button();
-            stopSpeakingBtn = new Button();
-            groupBox2 = new GroupBox();
-            groupBox3 = new GroupBox();
-            groupBox4 = new GroupBox();
-            groupBox5 = new GroupBox();
-            compareIO = new Button();
-            testBtn = new Button();
-            canvas = new FlowLayoutPanel();
-            growBtn = new Button();
-            shrinkBtn = new Button();
-            divideTwo = new Button();
-            divideFour = new Button();
-            rotateBtn = new Button();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
-            groupBox4.SuspendLayout();
-            groupBox5.SuspendLayout();
-            SuspendLayout();
+            this.textToSpeechBox = new System.Windows.Forms.RichTextBox();
+            this.speakBtn = new System.Windows.Forms.Button();
+            this.resumeBtn = new System.Windows.Forms.Button();
+            this.stopBtn = new System.Windows.Forms.Button();
+            this.pauseBtn = new System.Windows.Forms.Button();
+            this.englishOnBtn = new System.Windows.Forms.RadioButton();
+            this.portugueseOnBtn = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.speechToTxtBox = new System.Windows.Forms.RichTextBox();
+            this.speechToTxtBtn = new System.Windows.Forms.Button();
+            this.stopSpeakingBtn = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.compareIO = new System.Windows.Forms.Button();
+            this.testBtn = new System.Windows.Forms.Button();
+            this.canvas = new System.Windows.Forms.FlowLayoutPanel();
+            this.growBtn = new System.Windows.Forms.Button();
+            this.shrinkBtn = new System.Windows.Forms.Button();
+            this.divideTwo = new System.Windows.Forms.Button();
+            this.divideFour = new System.Windows.Forms.Button();
+            this.rotateBtn = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.SuspendLayout();
             // 
             // textToSpeechBox
             // 
-            textToSpeechBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textToSpeechBox.Location = new Point(7, 25);
-            textToSpeechBox.Margin = new Padding(3, 2, 3, 2);
-            textToSpeechBox.Name = "textToSpeechBox";
-            textToSpeechBox.Size = new Size(584, 109);
-            textToSpeechBox.TabIndex = 0;
-            textToSpeechBox.Text = "";
+            this.textToSpeechBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textToSpeechBox.Location = new System.Drawing.Point(7, 25);
+            this.textToSpeechBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textToSpeechBox.Name = "textToSpeechBox";
+            this.textToSpeechBox.Size = new System.Drawing.Size(584, 109);
+            this.textToSpeechBox.TabIndex = 0;
+            this.textToSpeechBox.Text = "";
             // 
             // speakBtn
             // 
-            speakBtn.Image = (Image)resources.GetObject("speakBtn.Image");
-            speakBtn.Location = new Point(6, 26);
-            speakBtn.Margin = new Padding(3, 2, 3, 2);
-            speakBtn.Name = "speakBtn";
-            speakBtn.Size = new Size(57, 33);
-            speakBtn.TabIndex = 2;
-            speakBtn.UseVisualStyleBackColor = true;
-            speakBtn.Click += speakBtn_Click;
+            this.speakBtn.Image = ((System.Drawing.Image)(resources.GetObject("speakBtn.Image")));
+            this.speakBtn.Location = new System.Drawing.Point(6, 26);
+            this.speakBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.speakBtn.Name = "speakBtn";
+            this.speakBtn.Size = new System.Drawing.Size(57, 33);
+            this.speakBtn.TabIndex = 2;
+            this.speakBtn.UseVisualStyleBackColor = true;
             // 
             // resumeBtn
             // 
-            resumeBtn.Anchor = AnchorStyles.Top;
-            resumeBtn.Image = (Image)resources.GetObject("resumeBtn.Image");
-            resumeBtn.Location = new Point(105, 26);
-            resumeBtn.Margin = new Padding(3, 2, 3, 2);
-            resumeBtn.Name = "resumeBtn";
-            resumeBtn.Size = new Size(57, 33);
-            resumeBtn.TabIndex = 3;
-            resumeBtn.UseVisualStyleBackColor = true;
-            resumeBtn.Click += resumeBtn_Click;
+            this.resumeBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.resumeBtn.Image = ((System.Drawing.Image)(resources.GetObject("resumeBtn.Image")));
+            this.resumeBtn.Location = new System.Drawing.Point(105, 26);
+            this.resumeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.resumeBtn.Name = "resumeBtn";
+            this.resumeBtn.Size = new System.Drawing.Size(57, 33);
+            this.resumeBtn.TabIndex = 3;
+            this.resumeBtn.UseVisualStyleBackColor = true;
             // 
             // stopBtn
             // 
-            stopBtn.Anchor = AnchorStyles.Top;
-            stopBtn.Image = (Image)resources.GetObject("stopBtn.Image");
-            stopBtn.Location = new Point(261, 26);
-            stopBtn.Margin = new Padding(3, 2, 3, 2);
-            stopBtn.Name = "stopBtn";
-            stopBtn.Size = new Size(57, 33);
-            stopBtn.TabIndex = 4;
-            stopBtn.UseVisualStyleBackColor = true;
-            stopBtn.Click += stopBtn_Click;
+            this.stopBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.stopBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopBtn.Image")));
+            this.stopBtn.Location = new System.Drawing.Point(261, 26);
+            this.stopBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(57, 33);
+            this.stopBtn.TabIndex = 4;
+            this.stopBtn.UseVisualStyleBackColor = true;
             // 
             // pauseBtn
             // 
-            pauseBtn.Anchor = AnchorStyles.Top;
-            pauseBtn.Image = (Image)resources.GetObject("pauseBtn.Image");
-            pauseBtn.Location = new Point(182, 26);
-            pauseBtn.Margin = new Padding(3, 2, 3, 2);
-            pauseBtn.Name = "pauseBtn";
-            pauseBtn.Size = new Size(57, 33);
-            pauseBtn.TabIndex = 5;
-            pauseBtn.UseVisualStyleBackColor = true;
-            pauseBtn.Click += pauseBtn_Click;
+            this.pauseBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pauseBtn.Image = ((System.Drawing.Image)(resources.GetObject("pauseBtn.Image")));
+            this.pauseBtn.Location = new System.Drawing.Point(182, 26);
+            this.pauseBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pauseBtn.Name = "pauseBtn";
+            this.pauseBtn.Size = new System.Drawing.Size(57, 33);
+            this.pauseBtn.TabIndex = 5;
+            this.pauseBtn.UseVisualStyleBackColor = true;
             // 
             // englishOnBtn
             // 
-            englishOnBtn.Anchor = AnchorStyles.Top;
-            englishOnBtn.AutoSize = true;
-            englishOnBtn.Location = new Point(22, 19);
-            englishOnBtn.Margin = new Padding(3, 2, 3, 2);
-            englishOnBtn.Name = "englishOnBtn";
-            englishOnBtn.Size = new Size(76, 22);
-            englishOnBtn.TabIndex = 7;
-            englishOnBtn.TabStop = true;
-            englishOnBtn.Text = "en-US";
-            englishOnBtn.UseVisualStyleBackColor = true;
-            englishOnBtn.CheckedChanged += radioButton1_CheckedChanged;
+            this.englishOnBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.englishOnBtn.AutoSize = true;
+            this.englishOnBtn.Location = new System.Drawing.Point(22, 19);
+            this.englishOnBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.englishOnBtn.Name = "englishOnBtn";
+            this.englishOnBtn.Size = new System.Drawing.Size(91, 26);
+            this.englishOnBtn.TabIndex = 7;
+            this.englishOnBtn.TabStop = true;
+            this.englishOnBtn.Text = "en-US";
+            this.englishOnBtn.UseVisualStyleBackColor = true;
             // 
             // portugueseOnBtn
             // 
-            portugueseOnBtn.Anchor = AnchorStyles.Top;
-            portugueseOnBtn.AutoSize = true;
-            portugueseOnBtn.Location = new Point(22, 42);
-            portugueseOnBtn.Margin = new Padding(3, 2, 3, 2);
-            portugueseOnBtn.Name = "portugueseOnBtn";
-            portugueseOnBtn.Size = new Size(70, 22);
-            portugueseOnBtn.TabIndex = 8;
-            portugueseOnBtn.TabStop = true;
-            portugueseOnBtn.Text = "pt-PT";
-            portugueseOnBtn.UseVisualStyleBackColor = true;
-            portugueseOnBtn.CheckedChanged += radioButton2_CheckedChanged;
+            this.portugueseOnBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.portugueseOnBtn.AutoSize = true;
+            this.portugueseOnBtn.Location = new System.Drawing.Point(22, 42);
+            this.portugueseOnBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.portugueseOnBtn.Name = "portugueseOnBtn";
+            this.portugueseOnBtn.Size = new System.Drawing.Size(85, 26);
+            this.portugueseOnBtn.TabIndex = 8;
+            this.portugueseOnBtn.TabStop = true;
+            this.portugueseOnBtn.Text = "pt-PT";
+            this.portugueseOnBtn.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(englishOnBtn);
-            groupBox1.Controls.Add(portugueseOnBtn);
-            groupBox1.Location = new Point(359, 31);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(98, 73);
-            groupBox1.TabIndex = 9;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Language";
+            this.groupBox1.Controls.Add(this.englishOnBtn);
+            this.groupBox1.Controls.Add(this.portugueseOnBtn);
+            this.groupBox1.Location = new System.Drawing.Point(359, 31);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(98, 73);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Language";
             // 
             // speechToTxtBox
             // 
-            speechToTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            speechToTxtBox.Location = new Point(6, 29);
-            speechToTxtBox.Margin = new Padding(3, 2, 3, 2);
-            speechToTxtBox.Name = "speechToTxtBox";
-            speechToTxtBox.Size = new Size(585, 115);
-            speechToTxtBox.TabIndex = 10;
-            speechToTxtBox.Text = "";
+            this.speechToTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.speechToTxtBox.Location = new System.Drawing.Point(6, 29);
+            this.speechToTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.speechToTxtBox.Name = "speechToTxtBox";
+            this.speechToTxtBox.Size = new System.Drawing.Size(585, 115);
+            this.speechToTxtBox.TabIndex = 10;
+            this.speechToTxtBox.Text = "";
             // 
             // speechToTxtBtn
             // 
-            speechToTxtBtn.Image = (Image)resources.GetObject("speechToTxtBtn.Image");
-            speechToTxtBtn.Location = new Point(6, 29);
-            speechToTxtBtn.Margin = new Padding(3, 2, 3, 2);
-            speechToTxtBtn.Name = "speechToTxtBtn";
-            speechToTxtBtn.Size = new Size(57, 33);
-            speechToTxtBtn.TabIndex = 13;
-            speechToTxtBtn.UseVisualStyleBackColor = true;
-            speechToTxtBtn.Click += speechToTxtBtn_Click;
+            this.speechToTxtBtn.Image = ((System.Drawing.Image)(resources.GetObject("speechToTxtBtn.Image")));
+            this.speechToTxtBtn.Location = new System.Drawing.Point(6, 29);
+            this.speechToTxtBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.speechToTxtBtn.Name = "speechToTxtBtn";
+            this.speechToTxtBtn.Size = new System.Drawing.Size(57, 33);
+            this.speechToTxtBtn.TabIndex = 13;
+            this.speechToTxtBtn.UseVisualStyleBackColor = true;
             // 
             // stopSpeakingBtn
             // 
-            stopSpeakingBtn.Anchor = AnchorStyles.Top;
-            stopSpeakingBtn.Image = (Image)resources.GetObject("stopSpeakingBtn.Image");
-            stopSpeakingBtn.Location = new Point(104, 29);
-            stopSpeakingBtn.Margin = new Padding(3, 2, 3, 2);
-            stopSpeakingBtn.Name = "stopSpeakingBtn";
-            stopSpeakingBtn.Size = new Size(57, 33);
-            stopSpeakingBtn.TabIndex = 14;
-            stopSpeakingBtn.UseVisualStyleBackColor = true;
-            stopSpeakingBtn.Click += stopSpeakingBtn_Click;
+            this.stopSpeakingBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.stopSpeakingBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopSpeakingBtn.Image")));
+            this.stopSpeakingBtn.Location = new System.Drawing.Point(104, 29);
+            this.stopSpeakingBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.stopSpeakingBtn.Name = "stopSpeakingBtn";
+            this.stopSpeakingBtn.Size = new System.Drawing.Size(57, 33);
+            this.stopSpeakingBtn.TabIndex = 14;
+            this.stopSpeakingBtn.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(textToSpeechBox);
-            groupBox2.Location = new Point(456, 31);
-            groupBox2.Margin = new Padding(4, 3, 4, 3);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(598, 147);
-            groupBox2.TabIndex = 15;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Input";
+            this.groupBox2.Controls.Add(this.textToSpeechBox);
+            this.groupBox2.Location = new System.Drawing.Point(456, 31);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox2.Size = new System.Drawing.Size(598, 147);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Input";
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(speechToTxtBox);
-            groupBox3.Location = new Point(456, 189);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(599, 156);
-            groupBox3.TabIndex = 16;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Ouput";
+            this.groupBox3.Controls.Add(this.speechToTxtBox);
+            this.groupBox3.Location = new System.Drawing.Point(456, 189);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(599, 156);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Ouput";
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(speakBtn);
-            groupBox4.Controls.Add(resumeBtn);
-            groupBox4.Controls.Add(pauseBtn);
-            groupBox4.Controls.Add(stopBtn);
-            groupBox4.Location = new Point(15, 31);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(335, 147);
-            groupBox4.TabIndex = 17;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Text-to-Speech";
+            this.groupBox4.Controls.Add(this.speakBtn);
+            this.groupBox4.Controls.Add(this.resumeBtn);
+            this.groupBox4.Controls.Add(this.pauseBtn);
+            this.groupBox4.Controls.Add(this.stopBtn);
+            this.groupBox4.Location = new System.Drawing.Point(15, 31);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(335, 147);
+            this.groupBox4.TabIndex = 17;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Text-to-Speech";
             // 
             // groupBox5
             // 
-            groupBox5.Controls.Add(compareIO);
-            groupBox5.Controls.Add(speechToTxtBtn);
-            groupBox5.Controls.Add(stopSpeakingBtn);
-            groupBox5.Location = new Point(16, 189);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(334, 156);
-            groupBox5.TabIndex = 18;
-            groupBox5.TabStop = false;
-            groupBox5.Text = "Speech-to-Text";
+            this.groupBox5.Controls.Add(this.compareIO);
+            this.groupBox5.Controls.Add(this.speechToTxtBtn);
+            this.groupBox5.Controls.Add(this.stopSpeakingBtn);
+            this.groupBox5.Location = new System.Drawing.Point(16, 189);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(334, 156);
+            this.groupBox5.TabIndex = 18;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Speech-to-Text";
             // 
             // compareIO
             // 
-            compareIO.Anchor = AnchorStyles.Top;
-            compareIO.Location = new Point(6, 76);
-            compareIO.Name = "compareIO";
-            compareIO.Size = new Size(155, 44);
-            compareIO.TabIndex = 15;
-            compareIO.Text = "Compare Input/Output";
-            compareIO.UseVisualStyleBackColor = true;
-            compareIO.Click += checkOutput_Click;
+            this.compareIO.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.compareIO.Location = new System.Drawing.Point(6, 76);
+            this.compareIO.Name = "compareIO";
+            this.compareIO.Size = new System.Drawing.Size(155, 44);
+            this.compareIO.TabIndex = 15;
+            this.compareIO.Text = "Compare Input/Output";
+            this.compareIO.UseVisualStyleBackColor = true;
             // 
             // testBtn
             // 
-            testBtn.Location = new Point(356, 311);
-            testBtn.Name = "testBtn";
-            testBtn.Size = new Size(92, 34);
-            testBtn.TabIndex = 20;
-            testBtn.Text = "TEST";
-            testBtn.UseVisualStyleBackColor = true;
-            testBtn.Click += testBtn_Click;
+            this.testBtn.Location = new System.Drawing.Point(356, 311);
+            this.testBtn.Name = "testBtn";
+            this.testBtn.Size = new System.Drawing.Size(92, 34);
+            this.testBtn.TabIndex = 20;
+            this.testBtn.Text = "TEST";
+            this.testBtn.UseVisualStyleBackColor = true;
             // 
             // canvas
             // 
-            canvas.BackColor = Color.White;
-            canvas.ForeColor = Color.Transparent;
-            canvas.Location = new Point(15, 351);
-            canvas.Name = "canvas";
-            canvas.Size = new Size(1039, 271);
-            canvas.TabIndex = 21;
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.ForeColor = System.Drawing.Color.Transparent;
+            this.canvas.Location = new System.Drawing.Point(15, 351);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(1039, 271);
+            this.canvas.TabIndex = 21;
             // 
             // growBtn
             // 
-            growBtn.Location = new Point(356, 109);
-            growBtn.Name = "growBtn";
-            growBtn.Size = new Size(92, 34);
-            growBtn.TabIndex = 22;
-            growBtn.Text = "grow";
-            growBtn.UseVisualStyleBackColor = true;
-            growBtn.Click += growBtn_Click;
+            this.growBtn.Location = new System.Drawing.Point(356, 109);
+            this.growBtn.Name = "growBtn";
+            this.growBtn.Size = new System.Drawing.Size(92, 34);
+            this.growBtn.TabIndex = 22;
+            this.growBtn.Text = "grow";
+            this.growBtn.UseVisualStyleBackColor = true;
             // 
             // shrinkBtn
             // 
-            shrinkBtn.Location = new Point(356, 149);
-            shrinkBtn.Name = "shrinkBtn";
-            shrinkBtn.Size = new Size(92, 34);
-            shrinkBtn.TabIndex = 23;
-            shrinkBtn.Text = "shrink";
-            shrinkBtn.UseVisualStyleBackColor = true;
-            shrinkBtn.Click += shrinkBtn_Click;
+            this.shrinkBtn.Location = new System.Drawing.Point(356, 149);
+            this.shrinkBtn.Name = "shrinkBtn";
+            this.shrinkBtn.Size = new System.Drawing.Size(92, 34);
+            this.shrinkBtn.TabIndex = 23;
+            this.shrinkBtn.Text = "shrink";
+            this.shrinkBtn.UseVisualStyleBackColor = true;
             // 
             // divideTwo
             // 
-            divideTwo.Location = new Point(356, 271);
-            divideTwo.Name = "divideTwo";
-            divideTwo.Size = new Size(92, 34);
-            divideTwo.TabIndex = 24;
-            divideTwo.Text = "/2";
-            divideTwo.UseVisualStyleBackColor = true;
-            divideTwo.Click += divideTwo_Click;
+            this.divideTwo.Location = new System.Drawing.Point(356, 271);
+            this.divideTwo.Name = "divideTwo";
+            this.divideTwo.Size = new System.Drawing.Size(92, 34);
+            this.divideTwo.TabIndex = 24;
+            this.divideTwo.Text = "Duplicate";
+            this.divideTwo.UseVisualStyleBackColor = true;
             // 
             // divideFour
             // 
-            divideFour.Location = new Point(356, 231);
-            divideFour.Name = "divideFour";
-            divideFour.Size = new Size(92, 34);
-            divideFour.TabIndex = 25;
-            divideFour.Text = "/4";
-            divideFour.UseVisualStyleBackColor = true;
-            divideFour.Click += divideFour_Click;
+            this.divideFour.Location = new System.Drawing.Point(356, 231);
+            this.divideFour.Name = "divideFour";
+            this.divideFour.Size = new System.Drawing.Size(92, 34);
+            this.divideFour.TabIndex = 25;
+            this.divideFour.Text = "/4";
+            this.divideFour.UseVisualStyleBackColor = true;
             // 
             // rotateBtn
             // 
-            rotateBtn.Location = new Point(356, 191);
-            rotateBtn.Name = "rotateBtn";
-            rotateBtn.Size = new Size(92, 34);
-            rotateBtn.TabIndex = 26;
-            rotateBtn.Text = "rotate";
-            rotateBtn.UseVisualStyleBackColor = true;
-            rotateBtn.Click += rotateBtn_Click;
+            this.rotateBtn.Location = new System.Drawing.Point(356, 191);
+            this.rotateBtn.Name = "rotateBtn";
+            this.rotateBtn.Size = new System.Drawing.Size(92, 34);
+            this.rotateBtn.TabIndex = 26;
+            this.rotateBtn.Text = "rotate";
+            this.rotateBtn.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 18F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1063, 634);
-            Controls.Add(rotateBtn);
-            Controls.Add(divideFour);
-            Controls.Add(divideTwo);
-            Controls.Add(shrinkBtn);
-            Controls.Add(growBtn);
-            Controls.Add(canvas);
-            Controls.Add(testBtn);
-            Controls.Add(groupBox5);
-            Controls.Add(groupBox4);
-            Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
-            Font = new Font("Microsoft Sans Serif", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "Form1";
-            Text = "Form1";
-            Load += Form1_Load;
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            groupBox4.ResumeLayout(false);
-            groupBox5.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1063, 634);
+            this.Controls.Add(this.rotateBtn);
+            this.Controls.Add(this.divideFour);
+            this.Controls.Add(this.divideTwo);
+            this.Controls.Add(this.shrinkBtn);
+            this.Controls.Add(this.growBtn);
+            this.Controls.Add(this.canvas);
+            this.Controls.Add(this.testBtn);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
