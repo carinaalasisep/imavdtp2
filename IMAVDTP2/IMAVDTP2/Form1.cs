@@ -16,9 +16,8 @@ namespace IMAVDTP2
         private BufferedWaveProvider bwp;
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
-        private List<string> possibleCommands = new List<string> { "draw", "duplicate" };
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle" };
-        private List<string> possibleMovements = new List<string> { "rotate", "grow", "shrink" };
+        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -254,7 +253,7 @@ namespace IMAVDTP2
             }
         }
 
-        private static void ApplyOperation(string? operation, CustomizedPanel? panel)
+        private void ApplyOperation(string? operation, CustomizedPanel? panel)
         {
             if (operation == "rotate")
             {
@@ -270,6 +269,18 @@ namespace IMAVDTP2
             {
                 ShrinkPanel(panel);
             }
+
+            if (operation == "duplicate")
+            {
+                ClonePanelAndAddToCanvas(panel);
+            }
+        }
+
+        private void ClonePanelAndAddToCanvas(CustomizedPanel? panel)
+        {
+            var newPanel = drawer.Draw(this.canvas, panel.shape, panel.color, panel.angle);
+            panel.Invalidate();
+            this.canvas.Controls.Add(newPanel);
         }
 
         private static void ShrinkPanel(CustomizedPanel? panel)
