@@ -52,19 +52,18 @@ namespace IMAVDTP2
             bwp.AddSamples(e.Buffer, 0, e.BytesRecorded);
         }
 
-        private void speakBtn_Click(object sender, EventArgs e)
+
+        private void resumeBtn_Click(object sender, EventArgs e)
         {
-            //Disposes the SpeechSynthesizer object   
-            speechSynthesizerObj.Dispose();
-            builder.ClearContent();
-            if (textToSpeechBox.Text != "")
+            if (speechSynthesizerObj != null)
             {
-                speechSynthesizerObj = new SpeechSynthesizer();
-                //Asynchronously speaks the contents present in RichTextBox   
-                builder.AppendText(textToSpeechBox.Text);
-                speechSynthesizerObj.SpeakAsync(builder);
-                pauseBtn.Enabled = true;
-                stopBtn.Enabled = true;
+                if (speechSynthesizerObj.State == SynthesizerState.Paused)
+                {
+                    //Resumes the SpeechSynthesizer object after it has been paused.   
+                    speechSynthesizerObj.Resume();
+                    resumeBtn.Enabled = false;
+                    speakBtn.Enabled = true;
+                }
             }
         }
 
@@ -96,17 +95,19 @@ namespace IMAVDTP2
             }
         }
 
-        private void resumeBtn_Click(object sender, EventArgs e)
+        private void speakBtn_Click(object sender, EventArgs e)
         {
-            if (speechSynthesizerObj != null)
+            //Disposes the SpeechSynthesizer object   
+            speechSynthesizerObj.Dispose();
+            builder.ClearContent();
+            if (textToSpeechBox.Text != "")
             {
-                if (speechSynthesizerObj.State == SynthesizerState.Paused)
-                {
-                    //Resumes the SpeechSynthesizer object after it has been paused.   
-                    speechSynthesizerObj.Resume();
-                    resumeBtn.Enabled = false;
-                    speakBtn.Enabled = true;
-                }
+                speechSynthesizerObj = new SpeechSynthesizer();
+                //Asynchronously speaks the contents present in RichTextBox   
+                builder.AppendText(textToSpeechBox.Text);
+                speechSynthesizerObj.SpeakAsync(builder);
+                pauseBtn.Enabled = true;
+                stopBtn.Enabled = true;
             }
         }
 
@@ -294,5 +295,6 @@ namespace IMAVDTP2
                 this.canvas.Controls.Add(panel);
             }
         }
+
     }
 }
