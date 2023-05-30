@@ -7,7 +7,7 @@ namespace IMAVDTP2.DrawerHelper
         public List<int> positionX = new List<int>();
         public List<int> positionY = new List<int>();
 
-        public CustomizedPanel Draw(Panel canvas, string shape, Color color,float angle)
+        public CustomizedPanel Draw(Panel canvas, string shape, Color color, float angle=0f)
         {
             //the shape is passed to be drawn 
             var panel = new CustomizedPanel(shape,color,angle);

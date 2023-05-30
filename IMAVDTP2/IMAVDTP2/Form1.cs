@@ -1,5 +1,6 @@
 using Google.Cloud.Speech.V1;
 using IMAVDTP2.DrawerHelper;
+using System.Linq;
 using System.Speech.Synthesis;
 using VisioForge.Libs.NAudio.Wave;
 
@@ -15,6 +16,9 @@ namespace IMAVDTP2
         private BufferedWaveProvider bwp;
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
+        private List<string> possibleCommands = new List<string> { "draw", "duplicate" };
+        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle" };
+        private List<string> possibleMovements = new List<string> { "rotate", "grow", "shrink" };
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -34,7 +38,6 @@ namespace IMAVDTP2
             pauseBtn.Enabled = false;
             stopBtn.Enabled = false;
 
-            //var speech = SpeechClient.Create();
             this.speech = new SpeechClientBuilder
             {
                 CredentialsPath = "../../../credentials.json"
@@ -117,8 +120,7 @@ namespace IMAVDTP2
             builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
             speechSynthesizerObj = new SpeechSynthesizer();
             speechSynthesizerObj.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult, 0,
-                new System.Globalization.CultureInfo(culture)
-                );
+                new System.Globalization.CultureInfo(culture));
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -178,23 +180,138 @@ namespace IMAVDTP2
                 {
                     Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
                     SampleRateHertz = 16000,
-                    LanguageCode = "en",
+                    LanguageCode = this.culture,
                 }, RecognitionAudio.FromFile("audio.raw"));
 
                 speechToTxtBox.Text = "";
 
                 foreach (var result in response.Results)
                 {
-                    foreach (var alternative in result.Alternatives)
-                    {
-                        speechToTxtBox.AppendText(alternative.Transcript);
-                    }
+                    ApplyCommandsFromVoice(result);
                 }
             }
             else
             {
-                speechToTxtBox.Text = "Couldnt fetch any audio! ";
+                speechToTxtBox.Text = "Couldn't fetch any audio! ";
             }
+        }
+
+        private void ApplyCommandsFromVoice(SpeechRecognitionResult? result)
+        {
+            foreach (var alternative in result.Alternatives)
+            {
+                speechToTxtBox.AppendText(alternative.Transcript);
+
+                var listOfWords = alternative.Transcript.ToLowerInvariant().Split(' ').ToList();
+
+                var shape = possibleShapes.FirstOrDefault(s => listOfWords.Contains(s));
+                var color = GetColorFromSpeech(listOfWords);
+                var operation = possibleCommands.FirstOrDefault(s => listOfWords.Contains(s));
+
+                // draw a new shape
+                if (listOfWords.Contains("draw"))
+                {
+                    DrawNewShape(shape, color);
+
+                    continue;
+                }
+
+                ApplyCommandsToExistingShapes(shape, color, operation);
+            }
+        }
+
+        private void ApplyCommandsToExistingShapes(string? shape, Color? color, string? operation)
+        {
+            var affectedPanels = this.createdPanels.Where(p => p.shape == shape);
+
+            foreach (var panel in affectedPanels)
+            {
+                // mudar a cor APENAS
+                if (color != null && operation == null)
+                {
+                    panel.color = color.Value;
+                    continue;
+                }
+
+                // faz a operação 
+                if (operation != null)
+                {
+                    if (color != null && panel.color != color)
+                    {
+                        continue;
+                    }
+
+                    ApplyOperation(operation, panel);
+                }
+            }
+        }
+
+        private void DrawNewShape(string? shape, Color? color)
+        {
+            if (shape != null)
+            {
+                this.createdPanels.Add(drawer.Draw(this.canvas, shape, color ?? Color.FromKnownColor(KnownColor.Black)));
+            }
+        }
+
+        private static void ApplyOperation(string? operation, CustomizedPanel? panel)
+        {
+            if (operation == "rotate")
+            {
+                RotatePanel(panel);
+            }
+
+            if (operation == "grow")
+            {
+                GrowPanel(panel);
+            }
+
+            if (operation == "shrink")
+            {
+                ShrinkPanel(panel);
+            }
+        }
+
+        private static void ShrinkPanel(CustomizedPanel? panel)
+        {
+            var shrinkFactor = 2;
+            panel.Width /= shrinkFactor;
+            panel.Height /= shrinkFactor;
+            panel.Invalidate();
+        }
+
+        private static void GrowPanel(CustomizedPanel? panel)
+        {
+            var growthFactor = 2;
+            panel.Width *= growthFactor;
+            panel.Height *= growthFactor;
+            panel.Invalidate();
+        }
+
+        private static void RotatePanel(CustomizedPanel? panel)
+        {
+            var newAngle = 15f;
+            panel.angle += newAngle;
+            panel.Invalidate();
+        }
+
+        private Color? GetColorFromSpeech(List<string> listOfWords)
+        {
+            var enumNameList = new List<string>();
+            foreach (int i in Enum.GetValues(typeof(KnownColor)))
+            {
+                enumNameList.Add(Enum.GetName(typeof(KnownColor), i).ToLowerInvariant());
+            }
+
+            var color = enumNameList.FirstOrDefault(s => listOfWords.Contains(s));
+
+            if(color != null)
+            {
+                var colorEnum = (KnownColor)Enum.Parse(typeof(KnownColor), color, true);
+                return Color.FromKnownColor(colorEnum);
+            }
+
+            return null;
         }
 
         private void checkOutput_Click(object sender, EventArgs e)
