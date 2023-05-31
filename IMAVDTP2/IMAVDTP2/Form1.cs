@@ -18,8 +18,9 @@ namespace IMAVDTP2
         private BufferedWaveProvider bwp;
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
-        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle" };
+        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "square" };
         private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
+        private List<string> directions = new List<string> { "right", "left"};
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -208,7 +209,7 @@ namespace IMAVDTP2
                 var shape = possibleShapes.FirstOrDefault(s => listOfWords.Contains(s));
                 var color = GetColorFromSpeech(listOfWords);
                 var operation = possibleCommands.FirstOrDefault(s => listOfWords.Contains(s));
-
+                var direction = directions.FirstOrDefault(s => listOfWords.Contains(s));
                 // draw a new shape
                 if (listOfWords.Contains("draw"))
                 {
@@ -217,11 +218,11 @@ namespace IMAVDTP2
                     continue;
                 }
 
-                ApplyCommandsToExistingShapes(shape, color, operation);
+                ApplyCommandsToExistingShapes(shape, color, operation, direction);
             }
         }
 
-        private void ApplyCommandsToExistingShapes(string? shape, Color? color, string? operation)
+        private void ApplyCommandsToExistingShapes(string? shape, Color? color, string? operation, string? direction)
         {
             var affectedPanels = this.createdPanels.Where(p => p.shape == shape);
 
@@ -231,6 +232,7 @@ namespace IMAVDTP2
                 if (color != null && operation == null)
                 {
                     panel.color = color.Value;
+                    panel.Invalidate();
                     continue;
                 }
 
@@ -242,7 +244,7 @@ namespace IMAVDTP2
                         continue;
                     }
 
-                    ApplyOperation(operation, panel);
+                    ApplyOperation(operation, panel, direction);
                 }
             }
         }
@@ -255,11 +257,18 @@ namespace IMAVDTP2
             }
         }
 
-        private void ApplyOperation(string? operation, CustomizedPanel? panel)
+        private void ApplyOperation(string? operation, CustomizedPanel? panel, string? direction)
         {
             if (operation == "rotate")
             {
-                RotatePanel(panel);
+                if(direction != null && direction == "right")
+                {
+                    RotatePanel(panel, 15f);
+                }
+                if (direction != null && direction == "left")
+                {
+                    RotatePanel(panel, -15f);
+                }
             }
 
             if (operation == "grow")
@@ -301,9 +310,8 @@ namespace IMAVDTP2
             panel.Invalidate();
         }
 
-        private static void RotatePanel(CustomizedPanel? panel)
+        private static void RotatePanel(CustomizedPanel? panel, float newAngle)
         {
-            var newAngle = 15f;
             panel.angle += newAngle;
             panel.Invalidate();
         }
@@ -371,8 +379,11 @@ namespace IMAVDTP2
         {
             var shape = "triangle";
             var color = Color.Green;
+            var color2 = Color.Blue;
             var angle = 0f;
             this.createdPanels.Add(drawer.Draw(this.canvas, shape, color, angle));
+
+            this.createdPanels.Add(drawer.Draw(this.canvas, shape, color2, angle));
         }
 
         private void growBtn_Click(object sender, EventArgs e)
