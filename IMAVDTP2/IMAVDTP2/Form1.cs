@@ -19,9 +19,9 @@ namespace IMAVDTP2
         private BufferedWaveProvider bwp;
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
-        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "square" };
-        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
-        private List<string> directions = new List<string> { "right", "left" };
+        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star" };
+        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move" };
+        private List<string> directions = new List<string> { "right", "left", "up", "down" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
 
         WaveIn waveIn;
@@ -222,9 +222,9 @@ namespace IMAVDTP2
                 }
 
 
-                if (listOfWords.Contains("image") || listOfWords.Contains("imagem"))
+                if (listOfWords.Contains("image") || listOfWords.Contains("imagem") || listOfWords.Contains("picture"))
                 {
-                    if (listOfWords.Contains("load") || listOfWords.Contains("carregar"))
+                    if (listOfWords.Contains("load") || listOfWords.Contains("carregar") || listOfWords.Contains("upload"))
                     {
                         LoadImage();
 
@@ -426,7 +426,7 @@ namespace IMAVDTP2
                 }
             }
 
-            if (operation == "slide")
+            if (operation == "move")
             {
                 SlideImages(direction);
             }
@@ -457,19 +457,19 @@ namespace IMAVDTP2
                     {
                         if (direction == null || (direction != null && direction == "right"))
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X + 10, pictureBox.Location.Y);
+                            pictureBox.Location = new Point(pictureBox.Location.X + 100, pictureBox.Location.Y);
                         }
                         if (direction != null && direction == "left")
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X - 10, pictureBox.Location.Y);
+                            pictureBox.Location = new Point(pictureBox.Location.X - 100, pictureBox.Location.Y);
                         }
                         if (direction != null && direction == "up")
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y + 10);
+                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y + 100);
                         }
                         if (direction != null && direction == "down")
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y - 10);
+                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y - 100);
                         }
                     }
                 }
