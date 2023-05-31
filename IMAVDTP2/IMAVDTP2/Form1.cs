@@ -1,7 +1,9 @@
 using Google.Cloud.Speech.V1;
+using IMAVDTP2.CropperHelper;
 using IMAVDTP2.DrawerHelper;
 using System.Linq;
 using System.Speech.Synthesis;
+using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
 
 namespace IMAVDTP2
@@ -316,7 +318,7 @@ namespace IMAVDTP2
 
             var color = enumNameList.FirstOrDefault(s => listOfWords.Contains(s));
 
-            if(color != null)
+            if (color != null)
             {
                 var colorEnum = (KnownColor)Enum.Parse(typeof(KnownColor), color, true);
                 return Color.FromKnownColor(colorEnum);
@@ -399,9 +401,15 @@ namespace IMAVDTP2
             }
         }
 
-        private void divideFour_Click(object sender, EventArgs e)
+        private void cropBtn_Click(object sender, EventArgs e)
         {
-
+            //only works with panels containing background images
+            string option = "upper left corner";
+            
+            foreach (var panel in createdPanels)
+            {
+                Cropper.ApplyCroppedImageToPanel(panel, option);
+            }
         }
 
         private void duplicate_Click(object sender, EventArgs e)

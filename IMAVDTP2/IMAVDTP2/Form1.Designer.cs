@@ -50,7 +50,7 @@
             growBtn = new Button();
             shrinkBtn = new Button();
             divideTwo = new Button();
-            divideFour = new Button();
+            cropBtn = new Button();
             rotateBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -297,15 +297,15 @@
             divideTwo.UseVisualStyleBackColor = true;
             divideTwo.Click += duplicate_Click;
             // 
-            // divideFour
+            // cropBtn
             // 
-            divideFour.Location = new Point(356, 231);
-            divideFour.Name = "divideFour";
-            divideFour.Size = new Size(92, 34);
-            divideFour.TabIndex = 25;
-            divideFour.Text = "/4";
-            divideFour.UseVisualStyleBackColor = true;
-            divideFour.Click += divideFour_Click;
+            cropBtn.Location = new Point(356, 231);
+            cropBtn.Name = "cropBtn";
+            cropBtn.Size = new Size(92, 34);
+            cropBtn.TabIndex = 25;
+            cropBtn.Text = "crop";
+            cropBtn.UseVisualStyleBackColor = true;
+            cropBtn.Click += cropBtn_Click;
             // 
             // rotateBtn
             // 
@@ -323,7 +323,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 634);
             Controls.Add(rotateBtn);
-            Controls.Add(divideFour);
+            Controls.Add(cropBtn);
             Controls.Add(divideTwo);
             Controls.Add(shrinkBtn);
             Controls.Add(growBtn);
@@ -371,7 +371,7 @@
         private Button growBtn;
         private Button shrinkBtn;
         private Button divideTwo;
-        private Button divideFour;
+        private Button cropBtn;
         private Button rotateBtn;
     }
 }
