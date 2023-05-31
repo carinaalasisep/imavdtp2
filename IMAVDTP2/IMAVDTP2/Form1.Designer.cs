@@ -52,6 +52,7 @@
             divideTwo = new Button();
             cropBtn = new Button();
             rotateBtn = new Button();
+            button1 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -123,7 +124,7 @@
             englishOnBtn.Location = new Point(22, 19);
             englishOnBtn.Margin = new Padding(3, 2, 3, 2);
             englishOnBtn.Name = "englishOnBtn";
-            englishOnBtn.Size = new Size(76, 22);
+            englishOnBtn.Size = new Size(65, 19);
             englishOnBtn.TabIndex = 7;
             englishOnBtn.TabStop = true;
             englishOnBtn.Text = "en-US";
@@ -137,7 +138,7 @@
             portugueseOnBtn.Location = new Point(22, 42);
             portugueseOnBtn.Margin = new Padding(3, 2, 3, 2);
             portugueseOnBtn.Name = "portugueseOnBtn";
-            portugueseOnBtn.Size = new Size(70, 22);
+            portugueseOnBtn.Size = new Size(59, 19);
             portugueseOnBtn.TabIndex = 8;
             portugueseOnBtn.TabStop = true;
             portugueseOnBtn.Text = "pt-PT";
@@ -317,11 +318,22 @@
             rotateBtn.UseVisualStyleBackColor = true;
             rotateBtn.Click += rotateBtn_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(225, 167);
+            button1.Name = "button1";
+            button1.Size = new Size(92, 34);
+            button1.TabIndex = 27;
+            button1.Text = "rotateImg";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 18F);
+            AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 634);
+            Controls.Add(button1);
             Controls.Add(rotateBtn);
             Controls.Add(cropBtn);
             Controls.Add(divideTwo);
@@ -373,5 +385,6 @@
         private Button divideTwo;
         private Button cropBtn;
         private Button rotateBtn;
+        private Button button1;
     }
 }

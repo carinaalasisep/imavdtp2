@@ -5,6 +5,7 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
+using VisioForge.Libs.ZXing;
 
 namespace IMAVDTP2
 {
@@ -21,6 +22,7 @@ namespace IMAVDTP2
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "square" };
         private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
         private List<string> directions = new List<string> { "right", "left"};
+        private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -196,10 +198,12 @@ namespace IMAVDTP2
             {
                 speechToTxtBox.Text = "Couldn't fetch any audio! ";
             }
+
         }
 
         private void ApplyCommandsFromVoice(SpeechRecognitionResult? result)
         {
+
             foreach (var alternative in result.Alternatives)
             {
                 speechToTxtBox.AppendText(alternative.Transcript);
@@ -216,6 +220,19 @@ namespace IMAVDTP2
                     DrawNewShape(shape, color);
 
                     continue;
+                }
+
+
+                if (listOfWords.Contains("image") || listOfWords.Contains("imagem"))
+                {
+                    if (listOfWords.Contains("load") || listOfWords.Contains("carregar"))
+                    {
+                        LoadImage();
+
+                        continue;
+                    }
+                    ApplyCommandsToExistingImages(operation);
+
                 }
 
                 ApplyCommandsToExistingShapes(shape, color, operation, direction);
@@ -261,7 +278,7 @@ namespace IMAVDTP2
         {
             if (operation == "rotate")
             {
-                if(direction != null && direction == "right")
+                if(direction == null || (direction != null && direction == "right"))
                 {
                     RotatePanel(panel, 15f);
                 }
@@ -335,6 +352,8 @@ namespace IMAVDTP2
             return null;
         }
 
+
+        #region Compare Input with Output
         private void checkOutput_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textToSpeechBox.Text) || string.IsNullOrEmpty(speechToTxtBox.Text))
@@ -362,9 +381,9 @@ namespace IMAVDTP2
                     }
                 }
 
-                if(output.Length > input.Length)
+                if (output.Length > input.Length)
                 {
-                    for(var i = input.Length; i < output.Length; i++)
+                    for (var i = input.Length; i < output.Length; i++)
                     {
                         speechToTxtBox.SelectionColor = Color.Red;
                         speechToTxtBox.SelectedText = output[i] + " ";
@@ -374,6 +393,74 @@ namespace IMAVDTP2
                 speechToTxtBox.Select(0, 0);
             }
         }
+        #endregion
+
+        #region Load image
+        private void LoadImage()
+        {
+            var openFile = new OpenFileDialog();
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                RotatablePictureBox pictureBox = new RotatablePictureBox();
+                pictureBox.Size = new Size(200, 200);
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.Image = Image.FromFile(openFile.FileName);
+
+                canvas.Controls.Add(pictureBox);
+                this.pictureBoxList.Add(pictureBox);
+            }
+        }
+
+
+        private void ApplyCommandsToExistingImages(string? operation)
+        {
+            if (operation == "rotate")
+            {
+                RotateImages();
+            }
+
+            if (operation == "grow")
+            {
+                GrowImages();
+            }
+
+            if (operation == "shrink")
+            {
+                ShrinkImages();
+            }
+
+            //if (operation == "duplicate")
+            //{
+            //    ClonePanelAndAddToCanvas(panel);
+            //}
+        }
+
+        private void RotateImages()
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        pictureBox.RotationAngle += 45;
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
+        }
+
+        private void GrowImages()
+        {
+
+        }
+
+        private void ShrinkImages()
+        {
+
+        }
+        #endregion
 
         private void testBtn_Click(object sender, EventArgs e)
         {
@@ -425,7 +512,7 @@ namespace IMAVDTP2
         {
             //only works with panels containing background images
             string option = "upper left corner";
-            
+
             foreach (var panel in createdPanels)
             {
                 Cropper.ApplyCroppedImageToPanel(panel, option);
@@ -452,5 +539,9 @@ namespace IMAVDTP2
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RotateImages();
+        }
     }
 }
