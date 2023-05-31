@@ -466,8 +466,8 @@ namespace IMAVDTP2
                 {
                     if (control is RotatablePictureBox pictureBox)
                     {
-                        pictureBox.Width = 300;
-                        pictureBox.Height = 300;
+                        pictureBox.Width *= 2;
+                        pictureBox.Height *= 2;
                     }
                 }
                 this.canvas.PerformLayout();
@@ -476,7 +476,18 @@ namespace IMAVDTP2
 
         private void ShrinkImages()
         {
-
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        pictureBox.Width /= 2;
+                        pictureBox.Height /= 2;
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
         }
         #endregion
 
@@ -555,11 +566,6 @@ namespace IMAVDTP2
             {
                 this.canvas.Controls.Add(panel);
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            GrowImages();
         }
     }
 }
