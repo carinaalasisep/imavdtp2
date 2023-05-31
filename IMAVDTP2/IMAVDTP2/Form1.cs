@@ -354,6 +354,15 @@ namespace IMAVDTP2
                     }
                 }
 
+                if(output.Length > input.Length)
+                {
+                    for(var i = input.Length; i < output.Length; i++)
+                    {
+                        speechToTxtBox.SelectionColor = Color.Red;
+                        speechToTxtBox.SelectedText = output[i] + " ";
+                    }
+                }
+
                 speechToTxtBox.Select(0, 0);
             }
         }
