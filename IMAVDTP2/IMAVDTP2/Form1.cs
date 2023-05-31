@@ -427,6 +427,11 @@ namespace IMAVDTP2
                 }
             }
 
+            if (operation == "slide")
+            {
+                SlideImages(direction);
+            }
+
             if (operation == "grow")
             {
                 GrowImages();
@@ -441,6 +446,36 @@ namespace IMAVDTP2
             //{
             //    ClonePanelAndAddToCanvas(panel);
             //}
+        }
+
+        private void SlideImages(string? direction)
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        if (direction == null || (direction != null && direction == "right"))
+                        {
+                            pictureBox.Location = new Point(pictureBox.Location.X + 10, pictureBox.Location.Y);
+                        }
+                        if (direction != null && direction == "left")
+                        {
+                            pictureBox.Location = new Point(pictureBox.Location.X - 10, pictureBox.Location.Y);
+                        }
+                        if (direction != null && direction == "up")
+                        {
+                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y + 10);
+                        }
+                        if (direction != null && direction == "down")
+                        {
+                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y - 10);
+                        }
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
         }
 
         private void RotateImages(float angle)
