@@ -52,7 +52,6 @@
             divideTwo = new Button();
             cropBtn = new Button();
             rotateBtn = new Button();
-            button1 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -318,19 +317,11 @@
             rotateBtn.UseVisualStyleBackColor = true;
             rotateBtn.Click += rotateBtn_Click;
             // 
-            // button1
-            // 
-            button1.Location = new Point(0, 0);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 634);
-            Controls.Add(button1);
             Controls.Add(rotateBtn);
             Controls.Add(cropBtn);
             Controls.Add(divideTwo);
@@ -382,6 +373,5 @@
         private Button divideTwo;
         private Button cropBtn;
         private Button rotateBtn;
-        private Button button1;
     }
 }

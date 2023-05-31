@@ -198,7 +198,6 @@ namespace IMAVDTP2
             {
                 speechToTxtBox.Text = "Couldn't fetch any audio! ";
             }
-
         }
 
         private void ApplyCommandsFromVoice(SpeechRecognitionResult? result)
@@ -442,10 +441,10 @@ namespace IMAVDTP2
                 ShrinkImages();
             }
 
-            //if (operation == "duplicate")
-            //{
-            //    ClonePanelAndAddToCanvas(panel);
-            //}
+            if (operation == "duplicate")
+            {
+                DuplicateImages();
+            }
         }
 
         private void SlideImages(string? direction)
@@ -521,6 +520,28 @@ namespace IMAVDTP2
                         pictureBox.Height /= 2;
                     }
                 }
+                this.canvas.PerformLayout();
+            }
+        }
+
+        private void DuplicateImages()
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                List<RotatablePictureBox> duplicatedImages = new List<RotatablePictureBox>();
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        RotatablePictureBox duplicatePictureBox = new RotatablePictureBox();
+                        duplicatePictureBox.Image = pictureBox.Image;
+                        duplicatePictureBox.SizeMode = pictureBox.SizeMode;
+                        duplicatePictureBox.Size = pictureBox.Size;
+
+                        duplicatedImages.Add(duplicatePictureBox);
+                    }
+                }
+                this.canvas.Controls.AddRange(duplicatedImages.ToArray());
                 this.canvas.PerformLayout();
             }
         }
