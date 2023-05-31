@@ -21,7 +21,7 @@ namespace IMAVDTP2
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "square" };
         private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
-        private List<string> directions = new List<string> { "right", "left"};
+        private List<string> directions = new List<string> { "right", "left" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
 
         WaveIn waveIn;
@@ -231,7 +231,7 @@ namespace IMAVDTP2
 
                         continue;
                     }
-                    ApplyCommandsToExistingImages(operation);
+                    ApplyCommandsToExistingImages(operation, direction);
 
                 }
 
@@ -278,7 +278,7 @@ namespace IMAVDTP2
         {
             if (operation == "rotate")
             {
-                if(direction == null || (direction != null && direction == "right"))
+                if (direction == null || (direction != null && direction == "right"))
                 {
                     RotatePanel(panel, 15f);
                 }
@@ -413,11 +413,18 @@ namespace IMAVDTP2
         }
 
 
-        private void ApplyCommandsToExistingImages(string? operation)
+        private void ApplyCommandsToExistingImages(string? operation, string? direction)
         {
             if (operation == "rotate")
             {
-                RotateImages();
+                if (direction == null || (direction != null && direction == "right"))
+                {
+                    RotateImages(45);
+                }
+                if (direction != null && direction == "left")
+                {
+                    RotateImages(-45);
+                }
             }
 
             if (operation == "grow")
@@ -436,7 +443,7 @@ namespace IMAVDTP2
             //}
         }
 
-        private void RotateImages()
+        private void RotateImages(float angle)
         {
             if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
             {
@@ -444,7 +451,7 @@ namespace IMAVDTP2
                 {
                     if (control is RotatablePictureBox pictureBox)
                     {
-                        pictureBox.RotationAngle += 45;
+                        pictureBox.RotationAngle += angle;
                     }
                 }
                 this.canvas.PerformLayout();
@@ -453,7 +460,18 @@ namespace IMAVDTP2
 
         private void GrowImages()
         {
-
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        pictureBox.Width = 300;
+                        pictureBox.Height = 300;
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
         }
 
         private void ShrinkImages()
@@ -539,9 +557,9 @@ namespace IMAVDTP2
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            RotateImages();
+            GrowImages();
         }
     }
 }

@@ -53,6 +53,7 @@
             cropBtn = new Button();
             rotateBtn = new Button();
             button1 = new Button();
+            button2 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -215,6 +216,7 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(button2);
             groupBox4.Controls.Add(speakBtn);
             groupBox4.Controls.Add(resumeBtn);
             groupBox4.Controls.Add(pauseBtn);
@@ -320,13 +322,20 @@
             // 
             // button1
             // 
-            button1.Location = new Point(225, 167);
+            button1.Location = new Point(0, 0);
             button1.Name = "button1";
-            button1.Size = new Size(92, 34);
-            button1.TabIndex = 27;
-            button1.Text = "rotateImg";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(182, 100);
+            button2.Name = "button2";
+            button2.Size = new Size(92, 34);
+            button2.TabIndex = 27;
+            button2.Text = "rotate";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Form1
             // 
@@ -386,5 +395,6 @@
         private Button cropBtn;
         private Button rotateBtn;
         private Button button1;
+        private Button button2;
     }
 }
