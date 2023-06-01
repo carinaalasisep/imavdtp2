@@ -5,11 +5,7 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
-<<<<<<< Updated upstream
-using VisioForge.Libs.ZXing;
-=======
 using static Google.Api.Gax.Grpc.Gcp.AffinityConfig.Types;
->>>>>>> Stashed changes
 
 namespace IMAVDTP2
 {
@@ -24,19 +20,15 @@ namespace IMAVDTP2
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star" };
-<<<<<<< Updated upstream
         private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move" };
         private List<string> directions = new List<string> { "right", "left", "up", "down" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
-=======
-        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
-        private List<string> directions = new List<string> { "right", "left" };
 
         //presets|lists
         private List<string> savePreset = new List<string> { "create" };
         private List<string> activatePreset = new List<string> { "activate" };
         private List<List<string>> presets = new List<List<string>>();
->>>>>>> Stashed changes
+
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -217,12 +209,8 @@ namespace IMAVDTP2
 
         private void ApplyCommandsFromVoice(List<string> result)
         {
-<<<<<<< Updated upstream
 
-            foreach (var alternative in result.Alternatives)
-=======
             foreach (var alternative in result)
->>>>>>> Stashed changes
             {
                 speechToTxtBox.AppendText(alternative);
 
@@ -396,11 +384,7 @@ namespace IMAVDTP2
         {
             if (operation == "rotate")
             {
-<<<<<<< Updated upstream
                 if (direction == null || (direction != null && direction == "right"))
-=======
-                if (direction != null && direction == "right")
->>>>>>> Stashed changes
                 {
                     RotatePanel(panel, 15f);
                 }
