@@ -5,7 +5,11 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
+<<<<<<< Updated upstream
 using VisioForge.Libs.ZXing;
+=======
+using static Google.Api.Gax.Grpc.Gcp.AffinityConfig.Types;
+>>>>>>> Stashed changes
 
 namespace IMAVDTP2
 {
@@ -20,9 +24,19 @@ namespace IMAVDTP2
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star" };
+<<<<<<< Updated upstream
         private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move" };
         private List<string> directions = new List<string> { "right", "left", "up", "down" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
+=======
+        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate" };
+        private List<string> directions = new List<string> { "right", "left" };
+
+        //presets|lists
+        private List<string> savePreset = new List<string> { "create" };
+        private List<string> activatePreset = new List<string> { "activate" };
+        private List<List<string>> presets = new List<List<string>>();
+>>>>>>> Stashed changes
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -191,7 +205,8 @@ namespace IMAVDTP2
 
                 foreach (var result in response.Results)
                 {
-                    ApplyCommandsFromVoice(result);
+                    var comands = result.Alternatives.Select(a => a.Transcript);
+                    ApplyCommandsFromVoice(comands.ToList());
                 }
             }
             else
@@ -200,19 +215,71 @@ namespace IMAVDTP2
             }
         }
 
-        private void ApplyCommandsFromVoice(SpeechRecognitionResult? result)
+        private void ApplyCommandsFromVoice(List<string> result)
         {
+<<<<<<< Updated upstream
 
             foreach (var alternative in result.Alternatives)
+=======
+            foreach (var alternative in result)
+>>>>>>> Stashed changes
             {
-                speechToTxtBox.AppendText(alternative.Transcript);
+                speechToTxtBox.AppendText(alternative);
 
-                var listOfWords = alternative.Transcript.ToLowerInvariant().Split(' ').ToList();
+                var listOfWords = alternative.ToLowerInvariant().Split(' ').ToList();
 
                 var shape = possibleShapes.FirstOrDefault(s => listOfWords.Contains(s));
                 var color = GetColorFromSpeech(listOfWords);
                 var operation = possibleCommands.FirstOrDefault(s => listOfWords.Contains(s));
                 var direction = directions.FirstOrDefault(s => listOfWords.Contains(s));
+
+                //presets
+                var save = savePreset.FirstOrDefault(s => listOfWords.Contains(s));
+                var activatelist = activatePreset.FirstOrDefault(s => listOfWords.Contains(s));
+
+                //create preset
+                if (listOfWords.Contains("create"))
+                {
+                    listOfWords = alternative.ToLowerInvariant().Split(',').ToList();
+
+                    shape = possibleShapes.FirstOrDefault(s => listOfWords.Contains(s));
+                    color = GetColorFromSpeech(listOfWords);
+                    operation = possibleCommands.FirstOrDefault(s => listOfWords.Contains(s));
+                    direction = directions.FirstOrDefault(s => listOfWords.Contains(s));
+
+                    //presets
+                    save = savePreset.FirstOrDefault(s => listOfWords.Contains(s));
+                    activatelist = activatePreset.FirstOrDefault(s => listOfWords.Contains(s));
+
+                    //remove save word
+                    var saveName = listOfWords[listOfWords.Count-1];
+                    var words = saveName.Split(" ");
+                    //words -> "create","name"
+
+                    //remove "create name"
+                    listOfWords.RemoveAt(listOfWords.Count-1);
+
+                    if (words.Length>=3)
+                    {
+                        //adding "name"
+                        listOfWords.Add(words[2]);
+                    }
+
+                    CreatePreset(listOfWords);
+                }
+
+                //activate list
+                if (listOfWords.Contains("activate"))
+                {
+
+                    //the preset name is the last
+                    var presetName = listOfWords.Last();
+
+                    //execute the Preset
+                    ExecutePreset(presetName, alternative, listOfWords);
+                    continue;
+                }
+
                 // draw a new shape
                 if (listOfWords.Contains("draw"))
                 {
@@ -235,7 +302,59 @@ namespace IMAVDTP2
                 }
 
                 ApplyCommandsToExistingShapes(shape, color, operation, direction);
+
             }
+        }
+
+        private void executeComands(string command)
+        {
+            //example -> draw blue square
+            var listOfWords = command.ToLowerInvariant().Split(' ').ToList();
+
+            var shape = possibleShapes.FirstOrDefault(s => listOfWords.Contains(s));
+            var color = GetColorFromSpeech(listOfWords);
+            var operation = possibleCommands.FirstOrDefault(s => listOfWords.Contains(s));
+            var direction = directions.FirstOrDefault(s => listOfWords.Contains(s));
+
+            // draw a new shape
+            if (command.Contains("draw"))
+            {
+                DrawNewShape(shape, color);
+
+                // continue;
+            }
+
+            else ApplyCommandsToExistingShapes(shape, color, operation, direction);
+        }
+
+        private void ExecutePreset(string presetName, string alternative, List<string> listOfWords)
+        {
+            List<string> listToExecute = new List<string>();
+
+            foreach (var preset in presets)
+            {
+                if (preset.Contains(presetName))
+                {
+                    listToExecute = preset;
+                }
+            }
+
+            if (listToExecute.Count > 0)
+            {
+                
+                //checks all elements minus the last one, which is the name of the preset
+                foreach (var command in listToExecute.Take(listToExecute.Count-1))
+                {
+                    executeComands(command);
+                }
+
+            }
+        }
+
+        private void CreatePreset(List<string> comands)
+        {
+
+            this.presets.Add(comands);
         }
 
         private void ApplyCommandsToExistingShapes(string? shape, Color? color, string? operation, string? direction)
@@ -277,7 +396,11 @@ namespace IMAVDTP2
         {
             if (operation == "rotate")
             {
+<<<<<<< Updated upstream
                 if (direction == null || (direction != null && direction == "right"))
+=======
+                if (direction != null && direction == "right")
+>>>>>>> Stashed changes
                 {
                     RotatePanel(panel, 15f);
                 }

@@ -220,7 +220,7 @@
             groupBox4.Controls.Add(stopBtn);
             groupBox4.Location = new Point(15, 31);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(335, 147);
+            groupBox4.Size = new Size(335, 73);
             groupBox4.TabIndex = 17;
             groupBox4.TabStop = false;
             groupBox4.Text = "Text-to-Speech";
