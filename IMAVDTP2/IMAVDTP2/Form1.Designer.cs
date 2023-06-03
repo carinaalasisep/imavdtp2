@@ -47,11 +47,6 @@
             compareIO = new Button();
             testBtn = new Button();
             canvas = new FlowLayoutPanel();
-            growBtn = new Button();
-            shrinkBtn = new Button();
-            divideTwo = new Button();
-            cropBtn = new Button();
-            rotateBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -61,18 +56,19 @@
             // 
             // textToSpeechBox
             // 
-            textToSpeechBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textToSpeechBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textToSpeechBox.Location = new Point(7, 25);
             textToSpeechBox.Margin = new Padding(3, 2, 3, 2);
             textToSpeechBox.Name = "textToSpeechBox";
-            textToSpeechBox.Size = new Size(584, 109);
+            textToSpeechBox.Size = new Size(683, 109);
             textToSpeechBox.TabIndex = 0;
             textToSpeechBox.Text = "";
             // 
             // speakBtn
             // 
+            speakBtn.Anchor = AnchorStyles.Top;
             speakBtn.Image = (Image)resources.GetObject("speakBtn.Image");
-            speakBtn.Location = new Point(6, 26);
+            speakBtn.Location = new Point(19, 26);
             speakBtn.Margin = new Padding(3, 2, 3, 2);
             speakBtn.Name = "speakBtn";
             speakBtn.Size = new Size(57, 33);
@@ -120,7 +116,7 @@
             // 
             englishOnBtn.Anchor = AnchorStyles.Top;
             englishOnBtn.AutoSize = true;
-            englishOnBtn.Location = new Point(22, 19);
+            englishOnBtn.Location = new Point(73, 35);
             englishOnBtn.Margin = new Padding(3, 2, 3, 2);
             englishOnBtn.Name = "englishOnBtn";
             englishOnBtn.Size = new Size(65, 19);
@@ -134,7 +130,7 @@
             // 
             portugueseOnBtn.Anchor = AnchorStyles.Top;
             portugueseOnBtn.AutoSize = true;
-            portugueseOnBtn.Location = new Point(22, 42);
+            portugueseOnBtn.Location = new Point(199, 35);
             portugueseOnBtn.Margin = new Padding(3, 2, 3, 2);
             portugueseOnBtn.Name = "portugueseOnBtn";
             portugueseOnBtn.Size = new Size(59, 19);
@@ -148,22 +144,22 @@
             // 
             groupBox1.Controls.Add(englishOnBtn);
             groupBox1.Controls.Add(portugueseOnBtn);
-            groupBox1.Location = new Point(359, 31);
+            groupBox1.Location = new Point(15, 111);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(98, 73);
+            groupBox1.Size = new Size(335, 73);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Language";
             // 
             // speechToTxtBox
             // 
-            speechToTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            speechToTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             speechToTxtBox.Location = new Point(6, 29);
             speechToTxtBox.Margin = new Padding(3, 2, 3, 2);
             speechToTxtBox.Name = "speechToTxtBox";
-            speechToTxtBox.Size = new Size(585, 115);
+            speechToTxtBox.Size = new Size(684, 115);
             speechToTxtBox.TabIndex = 10;
             speechToTxtBox.Text = "";
             // 
@@ -192,22 +188,24 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.Controls.Add(textToSpeechBox);
-            groupBox2.Location = new Point(456, 31);
+            groupBox2.Location = new Point(357, 31);
             groupBox2.Margin = new Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(598, 147);
+            groupBox2.Size = new Size(697, 147);
             groupBox2.TabIndex = 15;
             groupBox2.TabStop = false;
             groupBox2.Text = "Input";
             // 
             // groupBox3
             // 
+            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox3.Controls.Add(speechToTxtBox);
-            groupBox3.Location = new Point(456, 189);
+            groupBox3.Location = new Point(357, 189);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(599, 156);
+            groupBox3.Size = new Size(698, 156);
             groupBox3.TabIndex = 16;
             groupBox3.TabStop = false;
             groupBox3.Text = "Ouput";
@@ -250,7 +248,7 @@
             // 
             // testBtn
             // 
-            testBtn.Location = new Point(356, 311);
+            testBtn.Location = new Point(197, 1);
             testBtn.Name = "testBtn";
             testBtn.Size = new Size(92, 34);
             testBtn.TabIndex = 20;
@@ -260,6 +258,7 @@
             // 
             // canvas
             // 
+            canvas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             canvas.BackColor = Color.White;
             canvas.ForeColor = Color.Transparent;
             canvas.Location = new Point(15, 351);
@@ -267,66 +266,11 @@
             canvas.Size = new Size(1039, 271);
             canvas.TabIndex = 21;
             // 
-            // growBtn
-            // 
-            growBtn.Location = new Point(356, 109);
-            growBtn.Name = "growBtn";
-            growBtn.Size = new Size(92, 34);
-            growBtn.TabIndex = 22;
-            growBtn.Text = "grow";
-            growBtn.UseVisualStyleBackColor = true;
-            growBtn.Click += growBtn_Click;
-            // 
-            // shrinkBtn
-            // 
-            shrinkBtn.Location = new Point(356, 149);
-            shrinkBtn.Name = "shrinkBtn";
-            shrinkBtn.Size = new Size(92, 34);
-            shrinkBtn.TabIndex = 23;
-            shrinkBtn.Text = "shrink";
-            shrinkBtn.UseVisualStyleBackColor = true;
-            shrinkBtn.Click += shrinkBtn_Click;
-            // 
-            // divideTwo
-            // 
-            divideTwo.Location = new Point(356, 271);
-            divideTwo.Name = "divideTwo";
-            divideTwo.Size = new Size(92, 34);
-            divideTwo.TabIndex = 24;
-            divideTwo.Text = "/2";
-            divideTwo.UseVisualStyleBackColor = true;
-            divideTwo.Click += duplicate_Click;
-            // 
-            // cropBtn
-            // 
-            cropBtn.Location = new Point(356, 231);
-            cropBtn.Name = "cropBtn";
-            cropBtn.Size = new Size(92, 34);
-            cropBtn.TabIndex = 25;
-            cropBtn.Text = "crop";
-            cropBtn.UseVisualStyleBackColor = true;
-            cropBtn.Click += cropBtn_Click;
-            // 
-            // rotateBtn
-            // 
-            rotateBtn.Location = new Point(356, 191);
-            rotateBtn.Name = "rotateBtn";
-            rotateBtn.Size = new Size(92, 34);
-            rotateBtn.TabIndex = 26;
-            rotateBtn.Text = "rotate";
-            rotateBtn.UseVisualStyleBackColor = true;
-            rotateBtn.Click += rotateBtn_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 634);
-            Controls.Add(rotateBtn);
-            Controls.Add(cropBtn);
-            Controls.Add(divideTwo);
-            Controls.Add(shrinkBtn);
-            Controls.Add(growBtn);
             Controls.Add(canvas);
             Controls.Add(testBtn);
             Controls.Add(groupBox5);
@@ -335,8 +279,10 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Font = new Font("Microsoft Sans Serif", 8.999999F, FontStyle.Bold, GraphicsUnit.Point);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
@@ -368,10 +314,5 @@
         private Button compareIO;
         private Button testBtn;
         private FlowLayoutPanel canvas;
-        private Button growBtn;
-        private Button shrinkBtn;
-        private Button divideTwo;
-        private Button cropBtn;
-        private Button rotateBtn;
     }
 }
