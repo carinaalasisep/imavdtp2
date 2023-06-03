@@ -47,6 +47,7 @@
             compareIO = new Button();
             testBtn = new Button();
             canvas = new FlowLayoutPanel();
+            clearEverything = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -261,16 +262,28 @@
             canvas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             canvas.BackColor = Color.White;
             canvas.ForeColor = Color.Transparent;
-            canvas.Location = new Point(15, 351);
+            canvas.Location = new Point(15, 377);
             canvas.Name = "canvas";
-            canvas.Size = new Size(1039, 271);
+            canvas.Size = new Size(1039, 245);
             canvas.TabIndex = 21;
+            // 
+            // clearEverything
+            // 
+            clearEverything.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            clearEverything.Location = new Point(15, 348);
+            clearEverything.Name = "clearEverything";
+            clearEverything.Size = new Size(1039, 23);
+            clearEverything.TabIndex = 22;
+            clearEverything.Text = "Clear Canvas";
+            clearEverything.UseVisualStyleBackColor = true;
+            clearEverything.Click += clearEverything_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 634);
+            Controls.Add(clearEverything);
             Controls.Add(canvas);
             Controls.Add(testBtn);
             Controls.Add(groupBox5);
@@ -314,5 +327,6 @@
         private Button compareIO;
         private Button testBtn;
         private FlowLayoutPanel canvas;
+        private Button clearEverything;
     }
 }

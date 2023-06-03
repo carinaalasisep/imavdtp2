@@ -202,6 +202,14 @@ namespace IMAVDTP2
             speechSynthesizerObj = new SpeechSynthesizer();
             speechSynthesizerObj.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult, 0,
                 new System.Globalization.CultureInfo(culture));
+
+            groupBox4.Text = "Text-to-Speech";
+            groupBox1.Text = "Language";
+            groupBox5.Text = "Speech-to-Text";
+            compareIO.Text = "Comparar Input/Output";
+            groupBox2.Text = "Input";
+            groupBox3.Text = "Output";
+            clearEverything.Text = "Clear Canvas";
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -213,6 +221,15 @@ namespace IMAVDTP2
               new System.Globalization.CultureInfo(culture)
               );
             this.builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
+
+            groupBox4.Text = "Texto-para-Audio";
+            groupBox1.Text = "Linguagem";
+            groupBox5.Text = "Audio-para-Texto";
+            compareIO.Text = "Comparar Entrada/Saída";
+            groupBox2.Text = "Entrada";
+            groupBox3.Text = "Saída";
+            clearEverything.Text = "Limpar Ecrã";
+
         }
 
         private void speechToTxtBtn_Click(object sender, EventArgs e)
@@ -404,7 +421,7 @@ namespace IMAVDTP2
 
             if (listToExecute.Count > 0)
             {
-                
+
                 //checks all elements minus the last one, which is the name of the preset
                 foreach (var command in listToExecute.Take(listToExecute.Count - 1))
                 {
@@ -600,7 +617,7 @@ namespace IMAVDTP2
 
         private void ApplyCommandsToExistingImages(string? operation, string? direction)
         {
-            if (operation == "rotate" || operation =="rodar")
+            if (operation == "rotate" || operation == "rodar")
             {
                 if (direction == null || (direction != null && direction == "right") || (direction != null && direction == "direita"))
                 {
@@ -897,6 +914,11 @@ namespace IMAVDTP2
             {
                 this.canvas.Controls.Add(panel);
             }
+        }
+
+        private void clearEverything_Click(object sender, EventArgs e)
+        {
+            this.canvas.Controls.Clear();
         }
     }
 }
