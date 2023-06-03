@@ -1,11 +1,9 @@
 using Google.Cloud.Speech.V1;
 using IMAVDTP2.CropperHelper;
 using IMAVDTP2.DrawerHelper;
-using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
-using static Google.Api.Gax.Grpc.Gcp.AffinityConfig.Types;
 
 namespace IMAVDTP2
 {
@@ -209,7 +207,6 @@ namespace IMAVDTP2
 
         private void ApplyCommandsFromVoice(List<string> result)
         {
-
             foreach (var alternative in result)
             {
                 speechToTxtBox.AppendText(alternative);
@@ -259,12 +256,11 @@ namespace IMAVDTP2
                 //activate list
                 if (listOfWords.Contains("activate"))
                 {
-
                     //the preset name is the last
                     var presetName = listOfWords.Last();
 
                     //execute the Preset
-                    ExecutePreset(presetName, alternative, listOfWords);
+                    ExecutePreset(presetName);
                     continue;
                 }
 
@@ -276,7 +272,6 @@ namespace IMAVDTP2
                     continue;
                 }
 
-
                 if (listOfWords.Contains("image") || listOfWords.Contains("imagem") || listOfWords.Contains("picture"))
                 {
                     if (listOfWords.Contains("load") || listOfWords.Contains("carregar") || listOfWords.Contains("upload"))
@@ -285,12 +280,11 @@ namespace IMAVDTP2
 
                         continue;
                     }
-                    ApplyCommandsToExistingImages(operation, direction);
 
+                    ApplyCommandsToExistingImages(operation, direction);
                 }
 
                 ApplyCommandsToExistingShapes(shape, color, operation, direction);
-
             }
         }
 
@@ -315,7 +309,7 @@ namespace IMAVDTP2
             else ApplyCommandsToExistingShapes(shape, color, operation, direction);
         }
 
-        private void ExecutePreset(string presetName, string alternative, List<string> listOfWords)
+        private void ExecutePreset(string presetName)
         {
             List<string> listToExecute = new List<string>();
 
@@ -329,7 +323,6 @@ namespace IMAVDTP2
 
             if (listToExecute.Count > 0)
             {
-                
                 //checks all elements minus the last one, which is the name of the preset
                 foreach (var command in listToExecute.Take(listToExecute.Count-1))
                 {
@@ -341,7 +334,6 @@ namespace IMAVDTP2
 
         private void CreatePreset(List<string> comands)
         {
-
             this.presets.Add(comands);
         }
 
@@ -558,25 +550,30 @@ namespace IMAVDTP2
         {
             if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
             {
+                this.canvas.AutoScroll = false;
+                this.canvas.WrapContents = false;
                 foreach (var control in this.canvas.Controls)
                 {
                     if (control is RotatablePictureBox pictureBox)
                     {
                         if (direction == null || (direction != null && direction == "right"))
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X + 100, pictureBox.Location.Y);
+                            var innerPanel = new Panel();
+                            innerPanel.Size = pictureBox.Size;
+                            canvas.Controls.Add(innerPanel);
+                            canvas.Controls.SetChildIndex(innerPanel, 0);
                         }
-                        if (direction != null && direction == "left")
+                        if (direction != null && direction == "left" && canvas.Controls[0] is Panel)
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X - 100, pictureBox.Location.Y);
+                            this.canvas.Controls.RemoveAt(0);
                         }
                         if (direction != null && direction == "up")
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y + 100);
+                            //pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y + 100);
                         }
                         if (direction != null && direction == "down")
                         {
-                            pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y - 100);
+                            //pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y - 100);
                         }
                     }
                 }
