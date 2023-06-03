@@ -45,7 +45,6 @@
             groupBox4 = new GroupBox();
             groupBox5 = new GroupBox();
             compareIO = new Button();
-            testBtn = new Button();
             canvas = new FlowLayoutPanel();
             clearEverything = new Button();
             groupBox1.SuspendLayout();
@@ -246,16 +245,6 @@
             compareIO.Text = "Compare Input/Output";
             compareIO.UseVisualStyleBackColor = true;
             compareIO.Click += checkOutput_Click;
-            // 
-            // testBtn
-            // 
-            testBtn.Location = new Point(197, 1);
-            testBtn.Name = "testBtn";
-            testBtn.Size = new Size(92, 34);
-            testBtn.TabIndex = 20;
-            testBtn.Text = "TEST";
-            testBtn.UseVisualStyleBackColor = true;
-            testBtn.Click += testBtn_Click;
             // 
             // canvas
             // 

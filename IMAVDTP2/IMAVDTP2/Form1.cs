@@ -28,77 +28,49 @@ namespace IMAVDTP2
         private List<string> savePreset = new List<string> { "create", "criar" };
         private List<string> activatePreset = new List<string> { "activate", "ativar" };
         private List<List<string>> presets = new List<List<string>>();
-        private List<string> colorsPortuguese = new List<string>
+        private Dictionary<string, string> colorsPortuguese = new Dictionary<string, string>
         {
-            "Abóbora",
-            "Açafrão",
-            "Amarelo",
-            "Âmbar",
-            "Ameixa",
-            "Amêndoa",
-            "Ametista",
-            "Anil",
-            "Azul",
-            "Bege",
-            "Bordô",
-            "Branco",
-            "Bronze",
-            "Cáqui",
-            "Caramelo",
-            "Carmesi",
-            "Carmim",
-            "Castanho",
-            "Cereja",
-            "Chocola",
-            "Ciano",
-            "Cinza",
-            "Cinzento",
-            "Cobre",
-            "Coral",
-            "Creme",
-            "Damasco",
-            "Dourado",
-            "Escarla",
-            "Esmeralda",
-            "Ferrugem",
-            "Fúcsia",
-            "Gelo",
-            "Grená",
-            "Gris",
-            "Índigo",
-            "Jade",
-            "Jambo",
-            "Laranja",
-            "Lavanda",
-            "Lilás",
-            "Limão",
-            "Loiro",
-            "Magenta",
-            "Malva",
-            "Marfim",
-            "Marrom",
-            "Mostarda",
-            "Negro",
-            "Ocre",
-            "Oliva",
-            "Ouro",
-            "Pêssego",
-            "Prata",
-            "Preto",
-            "Púrpura",
-            "Rosa",
-            "Roxo",
-            "Rubro",
-            "Salmão",
-            "Sépia",
-            "Terraco",
-            "Tijolo",
-            "Turquesa",
-            "Uva",
-            "Verde",
-            "Vermelho",
-            "Vinho",
-            "Violeta"
+            {"amarelo", "yellow"},
+            {"amarela", "yellow"},
+            {"azul", "blue"},
+            {"bege", "beige"},
+            {"bordô", "maroon"},
+            {"branco", "white"},
+            {"bronze", "bronze"},
+            {"caramelo", "caramel"},
+            {"castanho", "brown"},
+            {"castanha", "brown"},
+            {"chocolate", "chocolate"},
+            {"cinza", "grey"},
+            {"cinzenta", "gray"},
+            {"cinzento", "gray"},
+            {"cobre", "coper"},
+            {"coral", "coral"},
+            {"dourado", "gold"},
+            {"dourada", "gold"},
+            {"esmeralda", "esmerald"},
+            {"índigo", "indigo"},
+            {"laranja", "orange"},
+            {"lavanda", "lavender"},
+            {"lilás", "lilac"},
+            {"limão", "lemon"},
+            {"loiro", "blond"},
+            {"magenta", "magenta"},
+            {"mostarda", "mustard"},
+            {"negro", "black"},
+            {"negra", "black"},
+            {"prata", "silver"},
+            {"preto", "black"},
+            {"púrpura", "purple"},
+            {"rosa", "pink"},
+            {"roxo", "purple"},
+            {"salmão", "salmon"},
+            {"turquesa", "turqoise"},
+            {"verde", "green"},
+            {"vermelho", "red"},
+            {"vermelha", "red"},
+            {"vinho", "wine"},
+            {"violeta", "violet"}
         };
 
         WaveIn waveIn;
@@ -544,6 +516,15 @@ namespace IMAVDTP2
                 var colorEnum = (KnownColor)Enum.Parse(typeof(KnownColor), color, true);
                 return Color.FromKnownColor(colorEnum);
             }
+            else
+            {
+                var colorPT = listOfWords.FirstOrDefault(w => colorsPortuguese.Keys.Contains(w));
+                if (colorPT != null && colorsPortuguese.TryGetValue(colorPT, out color))
+                {
+                    var colorEnum = (KnownColor)Enum.Parse(typeof(KnownColor), color, true);
+                    return Color.FromKnownColor(colorEnum);
+                }
+            }
 
             return null;
         }
@@ -838,87 +819,5 @@ namespace IMAVDTP2
         }
 
         #endregion
-
-        private void testBtn_Click(object sender, EventArgs e)
-        {
-            var shape = "triangle";
-            var color = Color.Green;
-            var color2 = Color.Blue;
-            var angle = 0f;
-            this.createdPanels.Add(drawer.Draw(this.canvas, shape, color, angle));
-
-            this.createdPanels.Add(drawer.Draw(this.canvas, shape, color2, angle));
-        }
-
-        private void growBtn_Click(object sender, EventArgs e)
-        {
-            //TODO: REDRAW OF THE SHAPE
-            var growthFactor = 2;
-
-            foreach (var panel in createdPanels)
-            {
-                panel.Width *= growthFactor;
-                panel.Height *= growthFactor;
-                panel.Invalidate();
-            }
-        }
-
-        private void shrinkBtn_Click(object sender, EventArgs e)
-        {
-            //TODO: REDRAW OF THE SHAPE
-            var shrinkFactor = 2;
-            foreach (var panel in createdPanels)
-            {
-                panel.Width /= shrinkFactor;
-                panel.Height /= shrinkFactor;
-                panel.Invalidate();
-            }
-        }
-
-        private void rotateBtn_Click(object sender, EventArgs e)
-        {
-            var newAngle = 15f;
-            foreach (var panel in createdPanels)
-            {
-                panel.angle += newAngle;
-                panel.Invalidate();
-            }
-        }
-
-        private void cropBtn_Click(object sender, EventArgs e)
-        {
-            //only works with panels containing background images
-            string option = "upper left corner";
-
-            foreach (var panel in createdPanels)
-            {
-                Cropper.ApplyCroppedImageToPanel(panel, option);
-            }
-        }
-
-        private void duplicate_Click(object sender, EventArgs e)
-        {
-            var newPanels = new List<CustomizedPanel>();
-            newPanels.AddRange(createdPanels);
-
-            foreach (var panel in createdPanels)
-            {
-                var newPanel = drawer.Draw(this.canvas, panel.shape, panel.color, panel.angle);
-                newPanels.Add(newPanel);
-                panel.Invalidate();
-            }
-
-            createdPanels = newPanels;
-
-            foreach (var panel in newPanels)
-            {
-                this.canvas.Controls.Add(panel);
-            }
-        }
-
-        private void clearEverything_Click(object sender, EventArgs e)
-        {
-            this.canvas.Controls.Clear();
-        }
     }
 }
