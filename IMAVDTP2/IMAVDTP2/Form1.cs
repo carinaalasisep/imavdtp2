@@ -1,10 +1,7 @@
 using Google.Cloud.Speech.V1;
-using IMAVDTP2.CropperHelper;
 using IMAVDTP2.DrawerHelper;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Speech.Synthesis;
-using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
 
 namespace IMAVDTP2
@@ -178,7 +175,7 @@ namespace IMAVDTP2
             groupBox4.Text = "Text-to-Speech";
             groupBox1.Text = "Language";
             groupBox5.Text = "Speech-to-Text";
-            compareIO.Text = "Comparar Input/Output";
+            compareIO.Text = "Compare Input/Output";
             groupBox2.Text = "Input";
             groupBox3.Text = "Output";
             clearEverything.Text = "Clear Canvas";
@@ -819,5 +816,10 @@ namespace IMAVDTP2
         }
 
         #endregion
+
+        private void clearEverything_Click(object sender, EventArgs e)
+        {
+            this.canvas.Controls.Clear();
+        }
     }
 }
