@@ -26,19 +26,19 @@ namespace IMAVDTP2.DrawerHelper
         {
             base.OnPaint(e);
 
-            if (shape == "circle")
+            if (shape == "circle" || shape == "círculo")
             {
                 drawCircle(e);
             }
-            if(shape == "triangle")
+            if(shape == "triangle" || shape == "triângulo")
             {
                 drawTriangle(e);
             }
-            if(shape == "star")
+            if(shape == "star" || shape == "estrela")
             {
                 drawStar(e);
             }
-            if (shape == "square")
+            if (shape == "square" || shape == "quadrado")
             {
                 drawSquare(e);
             }

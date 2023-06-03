@@ -19,16 +19,87 @@ namespace IMAVDTP2
         private BufferedWaveProvider bwp;
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
-        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star" };
-        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move","color" };
-        private List<string> directions = new List<string> { "right", "left", "up", "down" };
+        private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star", "quadrado", "triângulo", "círculo", "estrela" };
+        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move", "color", "rodar", "aumentar", "diminuir", "duplicar", "mover", "cor" };
+        private List<string> directions = new List<string> { "right", "left", "up", "down", "direita", "esquerda", "cima", "baixo" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
 
         //presets|lists
-        private List<string> savePreset = new List<string> { "create" };
-        private List<string> activatePreset = new List<string> { "activate" };
+        private List<string> savePreset = new List<string> { "create", "criar" };
+        private List<string> activatePreset = new List<string> { "activate", "ativar" };
         private List<List<string>> presets = new List<List<string>>();
-
+        private List<string> colorsPortuguese = new List<string>
+        {
+            "Abóbora",
+            "Açafrão",
+            "Amarelo",
+            "Âmbar",
+            "Ameixa",
+            "Amêndoa",
+            "Ametista",
+            "Anil",
+            "Azul",
+            "Bege",
+            "Bordô",
+            "Branco",
+            "Bronze",
+            "Cáqui",
+            "Caramelo",
+            "Carmesi",
+            "Carmim",
+            "Castanho",
+            "Cereja",
+            "Chocola",
+            "Ciano",
+            "Cinza",
+            "Cinzento",
+            "Cobre",
+            "Coral",
+            "Creme",
+            "Damasco",
+            "Dourado",
+            "Escarla",
+            "Esmeralda",
+            "Ferrugem",
+            "Fúcsia",
+            "Gelo",
+            "Grená",
+            "Gris",
+            "Índigo",
+            "Jade",
+            "Jambo",
+            "Laranja",
+            "Lavanda",
+            "Lilás",
+            "Limão",
+            "Loiro",
+            "Magenta",
+            "Malva",
+            "Marfim",
+            "Marrom",
+            "Mostarda",
+            "Negro",
+            "Ocre",
+            "Oliva",
+            "Ouro",
+            "Pêssego",
+            "Prata",
+            "Preto",
+            "Púrpura",
+            "Rosa",
+            "Roxo",
+            "Rubro",
+            "Salmão",
+            "Sépia",
+            "Terraco",
+            "Tijolo",
+            "Turquesa",
+            "Uva",
+            "Verde",
+            "Vermelho",
+            "Vinho",
+            "Violeta"
+        };
 
         WaveIn waveIn;
         WaveFileWriter writer;
@@ -135,7 +206,7 @@ namespace IMAVDTP2
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            this.culture = "pt-BR";
+            this.culture = "pt-PT";
             builder = new PromptBuilder(new System.Globalization.CultureInfo(culture));
             speechSynthesizerObj = new SpeechSynthesizer();
             speechSynthesizerObj.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult, 0,
@@ -225,7 +296,7 @@ namespace IMAVDTP2
                 var activatelist = activatePreset.FirstOrDefault(s => listOfWords.Contains(s));
 
                 //create preset
-                if (listOfWords.Contains("create"))
+                if (listOfWords.Any(w => this.savePreset.Contains(w)))
                 {
                     listOfWords = alternative.ToLowerInvariant().Split(',').ToList();
 
@@ -256,7 +327,7 @@ namespace IMAVDTP2
                 }
 
                 //activate list
-                if (listOfWords.Contains("activate"))
+                if (listOfWords.Any(w => this.activatePreset.Contains(w)))
                 {
                     //the preset name is the last
                     var presetName = listOfWords.Last();
@@ -267,7 +338,7 @@ namespace IMAVDTP2
                 }
 
                 // draw a new shape
-                if (listOfWords.Contains("draw"))
+                if (listOfWords.Contains("draw") || listOfWords.Contains("desenhar"))
                 {
                     DrawNewShape(shape, color);
 
@@ -284,7 +355,8 @@ namespace IMAVDTP2
                     }
 
                     //filter image
-                    if (listOfWords.Contains("black") && listOfWords.Contains("white"))
+                    if ((listOfWords.Contains("black") && listOfWords.Contains("white")) ||
+                        (listOfWords.Contains("preto") && listOfWords.Contains("branco")))
                     {
                         operation = "black and white";
                     }
@@ -308,7 +380,7 @@ namespace IMAVDTP2
             var direction = directions.FirstOrDefault(s => listOfWords.Contains(s));
 
             // draw a new shape
-            if (command.Contains("draw"))
+            if (command.Contains("draw") || command.Contains("desenhar"))
             {
                 DrawNewShape(shape, color);
 
@@ -338,7 +410,6 @@ namespace IMAVDTP2
                 {
                     executeComands(command);
                 }
-
             }
         }
 
@@ -384,29 +455,29 @@ namespace IMAVDTP2
 
         private void ApplyOperation(string? operation, CustomizedPanel? panel, string? direction)
         {
-            if (operation == "rotate")
+            if (operation == "rotate" || operation == "rodar")
             {
-                if (direction == null || (direction != null && direction == "right"))
+                if (direction == null || (direction != null && direction == "right") || (direction != null && direction == "direita"))
                 {
                     RotatePanel(panel, 15f);
                 }
-                if (direction != null && direction == "left")
+                if ((direction != null && direction == "left") || (direction != null && direction == "esquerda"))
                 {
                     RotatePanel(panel, -15f);
                 }
             }
 
-            if (operation == "grow")
+            if (operation == "grow" || operation == "aumentar")
             {
                 GrowPanel(panel);
             }
 
-            if (operation == "shrink")
+            if (operation == "shrink" || operation == "diminuir")
             {
                 ShrinkPanel(panel);
             }
 
-            if (operation == "duplicate")
+            if (operation == "duplicate" || operation == "duplicar")
             {
                 ClonePanelAndAddToCanvas(panel);
             }
@@ -444,7 +515,7 @@ namespace IMAVDTP2
         private Color? GetColorFromSpeech(List<string> listOfWords)
         {
             var enumNameList = new List<string>();
-            foreach (int i in Enum.GetValues(typeof(KnownColor)))
+            foreach (var i in Enum.GetValues(typeof(KnownColor)))
             {
                 enumNameList.Add(Enum.GetName(typeof(KnownColor), i).ToLowerInvariant());
             }
@@ -529,34 +600,34 @@ namespace IMAVDTP2
 
         private void ApplyCommandsToExistingImages(string? operation, string? direction)
         {
-            if (operation == "rotate")
+            if (operation == "rotate" || operation =="rodar")
             {
-                if (direction == null || (direction != null && direction == "right"))
+                if (direction == null || (direction != null && direction == "right") || (direction != null && direction == "direita"))
                 {
                     RotateImages(45);
                 }
-                if (direction != null && direction == "left")
+                if ((direction != null && direction == "left") || (direction != null && direction == "esquerda"))
                 {
                     RotateImages(-45);
                 }
             }
 
-            if (operation == "move")
+            if (operation == "move" || operation == "mover")
             {
                 SlideImages(direction);
             }
 
-            if (operation == "grow")
+            if (operation == "grow" || operation == "aumentar")
             {
                 GrowImages();
             }
 
-            if (operation == "shrink")
+            if (operation == "shrink" || operation == "diminuir")
             {
                 ShrinkImages();
             }
 
-            if (operation == "duplicate")
+            if (operation == "duplicate" || operation == "duplicar")
             {
                 DuplicateImages();
             }
@@ -566,7 +637,7 @@ namespace IMAVDTP2
                 FilterImagesBlackAndWhite();
             }
 
-            if (operation == "color")
+            if (operation == "color" || operation == "cor")
             {
                 RestoreImagesToColor();
             }
@@ -583,22 +654,23 @@ namespace IMAVDTP2
                 {
                     if (control is RotatablePictureBox pictureBox)
                     {
-                        if (direction == null || (direction != null && direction == "right"))
+                        if (direction == null || (direction != null && direction == "right") || (direction != null && direction == "direita"))
                         {
                             var innerPanel = new Panel();
                             innerPanel.Size = pictureBox.Size;
                             canvas.Controls.Add(innerPanel);
                             canvas.Controls.SetChildIndex(innerPanel, 0);
                         }
-                        if (direction != null && direction == "left" && canvas.Controls[0] is Panel)
+                        if ((direction != null && direction == "left" && canvas.Controls[0] is Panel) ||
+                            (direction != null && direction == "esquerda" && canvas.Controls[0] is Panel))
                         {
                             this.canvas.Controls.RemoveAt(0);
                         }
-                        if (direction != null && direction == "up")
+                        if (direction != null && direction == "up" || direction != null && direction == "cima")
                         {
                             //pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y + 100);
                         }
-                        if (direction != null && direction == "down")
+                        if (direction != null && direction == "down" || direction != null && direction == "baixo")
                         {
                             //pictureBox.Location = new Point(pictureBox.Location.X, pictureBox.Location.Y - 100);
                         }
