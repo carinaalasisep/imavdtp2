@@ -1,6 +1,8 @@
 using Google.Cloud.Speech.V1;
 using IMAVDTP2.CropperHelper;
 using IMAVDTP2.DrawerHelper;
+using System.Drawing.Imaging;
+using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
 using VisioForge.Libs.NAudio.Wave;
@@ -18,7 +20,7 @@ namespace IMAVDTP2
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star" };
-        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move" };
+        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move","color" };
         private List<string> directions = new List<string> { "right", "left", "up", "down" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
 
@@ -237,14 +239,14 @@ namespace IMAVDTP2
                     activatelist = activatePreset.FirstOrDefault(s => listOfWords.Contains(s));
 
                     //remove save word
-                    var saveName = listOfWords[listOfWords.Count-1];
+                    var saveName = listOfWords[listOfWords.Count - 1];
                     var words = saveName.Split(" ");
                     //words -> "create","name"
 
                     //remove "create name"
-                    listOfWords.RemoveAt(listOfWords.Count-1);
+                    listOfWords.RemoveAt(listOfWords.Count - 1);
 
-                    if (words.Length>=3)
+                    if (words.Length >= 3)
                     {
                         //adding "name"
                         listOfWords.Add(words[2]);
@@ -281,7 +283,14 @@ namespace IMAVDTP2
                         continue;
                     }
 
+                    //filter image
+                    if (listOfWords.Contains("black") && listOfWords.Contains("white"))
+                    {
+                        operation = "black and white";
+                    }
+
                     ApplyCommandsToExistingImages(operation, direction);
+
                 }
 
                 ApplyCommandsToExistingShapes(shape, color, operation, direction);
@@ -323,8 +332,9 @@ namespace IMAVDTP2
 
             if (listToExecute.Count > 0)
             {
+                
                 //checks all elements minus the last one, which is the name of the preset
-                foreach (var command in listToExecute.Take(listToExecute.Count-1))
+                foreach (var command in listToExecute.Take(listToExecute.Count - 1))
                 {
                     executeComands(command);
                 }
@@ -506,7 +516,13 @@ namespace IMAVDTP2
                 pictureBox.Image = Image.FromFile(openFile.FileName);
 
                 canvas.Controls.Add(pictureBox);
-                this.pictureBoxList.Add(pictureBox);
+
+                RotatablePictureBox copyPictureBox = new RotatablePictureBox();
+                copyPictureBox.Size = new Size(200, 200);
+                copyPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                copyPictureBox.Image = Image.FromFile(openFile.FileName);
+
+                this.pictureBoxList.Add(copyPictureBox);
             }
         }
 
@@ -544,6 +560,17 @@ namespace IMAVDTP2
             {
                 DuplicateImages();
             }
+
+            if (operation == "black and white")
+            {
+                FilterImagesBlackAndWhite();
+            }
+
+            if (operation == "color")
+            {
+                RestoreImagesToColor();
+            }
+
         }
 
         private void SlideImages(string? direction)
@@ -649,6 +676,78 @@ namespace IMAVDTP2
                 this.canvas.PerformLayout();
             }
         }
+
+
+        private void FilterImagesBlackAndWhite()
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        if (pictureBox.Image != null)
+                        {
+
+                            Bitmap originalImage = new Bitmap(pictureBox.Image);
+
+
+                            Bitmap blackAndWhiteImage = new Bitmap(originalImage.Width, originalImage.Height);
+
+
+                            using (Graphics graphics = Graphics.FromImage(blackAndWhiteImage))
+                            {
+
+                                ColorMatrix colorMatrix = new ColorMatrix(
+                                    new float[][]
+                                    {
+                            new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                            new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                            new float[] {0.114f, 0.114f, 0.114f, 0, 0},
+                            new float[] {0, 0, 0, 1, 0},
+                            new float[] {0, 0, 0, 0, 1}
+                                    });
+
+
+                                ImageAttributes attributes = new ImageAttributes();
+                                attributes.SetColorMatrix(colorMatrix);
+
+
+                                graphics.DrawImage(
+                                    originalImage,
+                                    new Rectangle(0, 0, originalImage.Width, originalImage.Height),
+                                    0,
+                                    0,
+                                    originalImage.Width,
+                                    originalImage.Height,
+                                    GraphicsUnit.Pixel,
+                                    attributes);
+                            }
+
+                            pictureBox.Image = blackAndWhiteImage;
+                        }
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
+        }
+        private void RestoreImagesToColor()
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                var pictureIndex = 0;
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        pictureBox.Image = this.pictureBoxList[pictureIndex].Image;
+                        pictureIndex++;
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
+        }
+
         #endregion
 
         private void testBtn_Click(object sender, EventArgs e)
