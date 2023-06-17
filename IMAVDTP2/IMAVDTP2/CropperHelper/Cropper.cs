@@ -8,58 +8,53 @@ namespace IMAVDTP2.CropperHelper
 {
     public class Cropper
     {
-        public static void ApplyCroppedImageToPanel(Panel panel,string option)
+        public static void ApplyCroppedImageToPanel(PictureBox pictureBox, string option)
         {
-            Bitmap croppedImage = CropPanelCorner(panel,option);
+            Bitmap croppedImage = CropPictureBoxCorner(pictureBox, option);
 
-            // Set the cropped image as the background image of the panel
-            panel.BackgroundImage = croppedImage;
+            pictureBox.Image = croppedImage;
 
-            // Refresh the panel to update the displayed image
-            panel.Invalidate();
+            pictureBox.Refresh();
         }
 
-        private static Bitmap CropPanelCorner(Panel panel,string option)
+        private static Bitmap CropPictureBoxCorner(PictureBox pictureBox, string option)
         {
-            var resultBitmap = new Bitmap(panel.Width, panel.Height);
+            var resultBitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
 
             using (Graphics graphics = Graphics.FromImage(resultBitmap))
             {
-                // Capture the content of the panel
-                panel.DrawToBitmap(resultBitmap, new Rectangle(0, 0, panel.Width, panel.Height));
+                // Captura o conteúdo da picture box
+                pictureBox.DrawToBitmap(resultBitmap, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
             }
 
-            // Define the region to crop (triangular regions)
-            int cropStartX = panel.Width;
-            int cropStartY = panel.Height;
+            // Define a região para recortar (regiões triangulares)
+            int cropStartX = pictureBox.Width;
+            int cropStartY = pictureBox.Height;
 
             if (option == "lower right corner")
             {
-                // Crop the top left part (top-left triangle) by setting the pixels to transparent
+                // Recorta a parte superior esquerda (triângulo superior esquerdo), definindo os pixels como transparentes
                 for (int y = 0; y < cropStartY; y++)
                 {
                     for (int x = 0; x < cropStartX - y; x++)
                     {
                         Color pixelColor = resultBitmap.GetPixel(x, y);
                         resultBitmap.SetPixel(x, y, Color.FromArgb(0, pixelColor.R, pixelColor.G, pixelColor.B));
-
                     }
                 }
             }
 
             if (option == "upper left corner")
             {
-
                 for (int y = 0; y < cropStartY; y++)
                 {
-                    for(int x = 0;x< cropStartX; x++)
+                    for (int x = 0; x < cropStartX; x++)
                     {
                         Color pixelColor = resultBitmap.GetPixel(x, y);
                         resultBitmap.SetPixel(x, y, Color.FromArgb(0, pixelColor.R, pixelColor.G, pixelColor.B));
                     }
                 }
-                
-                // Save the top left part
+
                 for (int y = 0; y < cropStartY; y++)
                 {
                     for (int x = 0; x < cropStartX - y; x++)
@@ -72,8 +67,6 @@ namespace IMAVDTP2.CropperHelper
 
             return resultBitmap;
         }
-
-
 
     }
 }

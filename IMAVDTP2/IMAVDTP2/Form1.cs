@@ -1,4 +1,5 @@
 using Google.Cloud.Speech.V1;
+using IMAVDTP2.CropperHelper;
 using IMAVDTP2.DrawerHelper;
 using System.Drawing.Imaging;
 using System.Speech.Synthesis;
@@ -17,7 +18,9 @@ namespace IMAVDTP2
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star", "quadrado", "triângulo", "círculo", "estrela" };
-        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move", "color", "rodar", "aumentar", "diminuir", "duplicar", "mover", "cor" };
+        private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move",
+            "color", "rodar", "aumentar", "diminuir", "duplicar", "mover", "cor", "top left corner",
+            "canto superior esquerdo","low right corner","canto inferior direito"};
         private List<string> directions = new List<string> { "right", "left", "up", "down", "direita", "esquerda", "cima", "baixo" };
         private List<RotatablePictureBox> pictureBoxList = new List<RotatablePictureBox>();
 
@@ -347,6 +350,28 @@ namespace IMAVDTP2
                         operation = "black and white";
                     }
 
+                    //filter low right corner
+                    if (    (listOfWords.Contains("low") && listOfWords.Contains("right")
+                            && listOfWords.Contains("corner")) ||
+
+                           (listOfWords.Contains("canto") && listOfWords.Contains("inferior")
+                           && listOfWords.Contains("direito"))
+                       )
+                    {
+                        operation = "low right corner";
+                    }
+
+                    //filter top left corner
+                    if ((listOfWords.Contains("top") && listOfWords.Contains("left")
+                           && listOfWords.Contains("corner")) ||
+
+                          (listOfWords.Contains("canto") && listOfWords.Contains("superior")
+                          && listOfWords.Contains("esquerdo"))
+                      )
+                    {
+                        operation = "top left corner";
+                    }
+
                     ApplyCommandsToExistingImages(operation, direction);
 
                 }
@@ -592,7 +617,6 @@ namespace IMAVDTP2
             }
         }
 
-
         private void ApplyCommandsToExistingImages(string? operation, string? direction)
         {
             if (operation == "rotate" || operation == "rodar")
@@ -635,6 +659,15 @@ namespace IMAVDTP2
             if (operation == "color" || operation == "cor")
             {
                 RestoreImagesToColor();
+            }
+
+            if(operation == "top left corner")
+            {
+                ShowTopLeftCornerImages();
+            }
+            if(operation == "low right corner")
+            {
+                ShowLowRightCornerImages();
             }
 
         }
@@ -744,6 +777,41 @@ namespace IMAVDTP2
             }
         }
 
+        private void ShowTopLeftCornerImages()
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        if (pictureBox.Image != null)
+                        {
+                            Cropper.ApplyCroppedImageToPanel(pictureBox, "upper left corner");
+                        }
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
+        }
+
+        private void ShowLowRightCornerImages()
+        {
+            if (this.pictureBoxList.Count <= this.canvas.Controls.Count)
+            {
+                foreach (var control in this.canvas.Controls)
+                {
+                    if (control is RotatablePictureBox pictureBox)
+                    {
+                        if (pictureBox.Image != null)
+                        {
+                            Cropper.ApplyCroppedImageToPanel(pictureBox, "lower right corner");
+                        }
+                    }
+                }
+                this.canvas.PerformLayout();
+            }
+        }
 
         private void FilterImagesBlackAndWhite()
         {
