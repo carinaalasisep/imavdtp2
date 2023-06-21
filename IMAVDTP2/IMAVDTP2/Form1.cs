@@ -17,6 +17,7 @@ namespace IMAVDTP2
         private BufferedWaveProvider bwp;
         private Drawer drawer = new Drawer();
         private List<CustomizedPanel> createdPanels = new List<CustomizedPanel>();
+        private List<CustomizedPanel> duplicatedPanels = new List<CustomizedPanel>();
         private List<string> possibleShapes = new List<string> { "square", "triangle", "circle", "star", "quadrado", "triângulo", "círculo", "estrela" };
         private List<string> possibleCommands = new List<string> { "rotate", "grow", "shrink", "duplicate", "move",
             "color", "rodar", "aumentar", "diminuir", "duplicar", "mover", "cor", "top left corner",
@@ -454,6 +455,8 @@ namespace IMAVDTP2
                     ApplyOperation(operation, panel, direction);
                 }
             }
+            this.createdPanels.AddRange(this.duplicatedPanels);
+            this.duplicatedPanels.Clear();
         }
 
         private void DrawNewShape(string? shape, Color? color)
@@ -494,11 +497,16 @@ namespace IMAVDTP2
             }
         }
 
-        private void ClonePanelAndAddToCanvas(CustomizedPanel? panel)
+        private void ClonePanelAndAddToCanvas(CustomizedPanel panel)
         {
-            var newPanel = drawer.Draw(this.canvas, panel.shape, panel.color, panel.angle);
-            panel.Invalidate();
-            this.canvas.Controls.Add(newPanel);
+            var duplicatedPanels = new List<CustomizedPanel>();
+            
+            var newpanel = drawer.Draw(this.canvas, panel.shape, panel.color, panel.angle);
+            duplicatedPanels.Add(newpanel);
+            this.duplicatedPanels.Add(newpanel);
+
+            this.canvas.Controls.AddRange(duplicatedPanels.ToArray());
+            this.canvas.PerformLayout();
         }
 
         private static void ShrinkPanel(CustomizedPanel? panel)
